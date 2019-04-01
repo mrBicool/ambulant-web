@@ -13,15 +13,17 @@ $(document).ready(function(){
     btnLogout();  
 
     if( getStorage('token') != null || getStorage('token') != '' ){
-         
+         $('.current-user-name').text( getStorage('name') );
     }
 }); 
 
 //global variable for all page  
-var api = 'http://ambulant-api.beta:8001/api';
+var api = 'http://ambulant-api.beta:8005/api';
 var local_printer_api = "http://instafood-printer.dsc:8082/api";
 var routes = {
-    login:              '/login', 
+    login:              '/login',
+    categories:         '/outlet/category',
+    subCategories:      '/outlet/category/sub-category'
 };
 let main_cart;
 var main_cart_other;
@@ -57,11 +59,13 @@ function postWithHeader(url, request, callback) {
         dataType: "json",
         data: request,
         headers: {
-            //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            token: getStorage('token')
+            //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
+            'Authorization': 'Bearer '+getStorage('api_token'),
+        },
+        beforeSend: function (xhr) {
+            //xhr.setRequestHeader('Authorization', 'Bearer '+getStorage('api_token') );
         },
         success: function (data) {
-            console.log(data);
             callback(data);
         },
         error: function (data) {
@@ -119,7 +123,7 @@ function customPost(url, request, callback) {
 // Authentication Handler
 //
 function isLogin() {
-    var token = getStorage('token');
+    var token = getStorage('api_token');
     if (token == '' || token == null) {
         return false; //says that the user is not loggedin
     }
@@ -232,8 +236,8 @@ function btnLogin(){
 }
 
 function btnLogout() {
-    $('.btn-signout').on('click', function () {
-        console.log('btn-signout clicked...');
+    $('.btn-logout').on('click', function () {
+        console.log('btn-logout clicked...');
         logout();
     });
 }

@@ -7,7 +7,7 @@
     <title>Login | {{ config('app.name') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="assets/images/logo/favico.ico">
 
     <!-- plugins css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />

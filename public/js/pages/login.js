@@ -39,19 +39,19 @@ function login(username, password){
 
     post('/login', data, function(response){
         if(response.success == false){
-            if(response.status == 2){
+            if(response.status == 500){
                 showWarning('',response.message, function(){});
                 return;
             }
-            if(response.status == 3){
+            if(response.status == 401){
                 showError('',response.message, function(){
-                    redirectTo('/login');
+                    // redirectTo('/login');
                 });
                 return;
             }
-        } 
+        }
         console.log(response);
-        setStorage('token', response.data.token);
+        setStorage('api_token', response.data.api_token);
         setStorage('name', response.data.name);
         setStorage('outlet', JSON.stringify(response.data.outlet));
         redirectTo('/');

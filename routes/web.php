@@ -13,3 +13,5 @@
 
 Route::get('/login',                'PagesController@login');
 Route::get('/',                     'PagesController@home');
+Route::get('/sub-category',         'PagesController@subCategory');
+Route::get('/sub-category/products','PagesController@products');

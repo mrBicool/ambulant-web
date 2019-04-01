@@ -25,7 +25,7 @@
                             <ul class="list-unstyled list-info">
                                 <li>
                                     <a href="#">
-                                        <img class="thumb-img" src="assets/images/avatars/thumb-1.jpg" alt="">
+                                        <img class="thumb-img" src="/assets/images/avatars/thumb-1.jpg" alt="">
                                         <div class="info">
                                             <span class="title">Jordan Hurst</span>
                                             <span class="sub-title">
@@ -37,7 +37,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img class="thumb-img" src="assets/images/avatars/thumb-5.jpg" alt="">
+                                        <img class="thumb-img" src="/assets/images/avatars/thumb-5.jpg" alt="">
                                         <div class="info">
                                             <span class="title">Jennifer Watkins</span>
                                             <span class="sub-title">
@@ -49,7 +49,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img class="thumb-img" src="assets/images/avatars/thumb-4.jpg" alt="">
+                                        <img class="thumb-img" src="/assets/images/avatars/thumb-4.jpg" alt="">
                                         <div class="info">
                                             <span class="title">Michael Birch</span>
                                             <span class="sub-title">
@@ -70,7 +70,7 @@
                             <ul class="list-unstyled list-info">
                                 <li>
                                     <a href="#">
-                                        <img class="thumb-img" src="assets/images/img-1.jpg" alt="">
+                                        <img class="thumb-img" src="/assets/images/img-1.jpg" alt="">
                                         <div class="info">
                                             <span class="title">Artoo expresses his relief</span>
                                             <span class="sub-title">
@@ -81,7 +81,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img class="thumb-img" src="assets/images/img-2.jpg" alt="">
+                                        <img class="thumb-img" src="/assets/images/img-2.jpg" alt="">
                                         <div class="info">
                                             <span class="title">Ready for some power?</span>
                                             <span class="sub-title">
@@ -102,14 +102,14 @@
         <ul class="nav-right">
             <li class="user-profile dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img class="profile-img img-fluid" src="assets/images/user.jpg" alt="">
+                    <img class="profile-img img-fluid" src="/assets/images/user.jpg" alt="">
                     <div class="user-info">
-                        <span class="name pdd-right-5">Nate Leong</span>
+                        <span class="name pdd-right-5 current-user-name">Nate Leong</span>
                         <i class="ti-angle-down font-size-10"></i>
                     </div>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
+                    {{-- <li>
                         <a href="#">
                             <i class="ti-settings pdd-right-10"></i>
                             <span>Setting</span>
@@ -127,10 +127,10 @@
                             <span>Inbox</span>
                         </a>
                     </li>
-                    <li role="separator" class="divider"></li>
+                    <li role="separator" class="divider"></li> --}}
                     <li>
-                        <a href="#">
-                            <i class="ti-power-off pdd-right-10"></i>
+                        <a href="#" class="btn-logout">
+                            <i class="ti-power-off pdd-right-10 "></i>
                             <span>Logout</span>
                         </a>
                     </li>
