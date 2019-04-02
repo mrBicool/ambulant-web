@@ -18,12 +18,14 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://ambulant-api.beta:8005/api';
+var api = 'http://172.16.12.130:8005/api';
 var local_printer_api = "http://instafood-printer.dsc:8082/api";
 var routes = {
     login:              '/login',
     categories:         '/outlet/category',
-    subCategories:      '/outlet/category/sub-category'
+    subCategories:      '/outlet/category/sub-category',
+    products:           '/outlet/category/sub-category/products',
+    product:            '/product'
 };
 let main_cart;
 var main_cart_other;
@@ -45,7 +47,7 @@ function post(url, request, callback) {
         },
         error: function (data) {
             console.log(data);
-            showError('Server error', 'Please ask the system administrator about this problem!', function () {
+            showError('Server error' + data, 'Please ask the system administrator about this problem!', function () {
 
             });
         }
@@ -60,12 +62,14 @@ function postWithHeader(url, request, callback) {
         data: request,
         headers: {
             //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
-            'Authorization': 'Bearer '+getStorage('api_token'),
+            'Authorization':    'Bearer '+getStorage('api_token'),
+            'Accept':           'application/json'
         },
         beforeSend: function (xhr) {
             //xhr.setRequestHeader('Authorization', 'Bearer '+getStorage('api_token') );
         },
         success: function (data) {
+            console.log(data);
             callback(data);
         },
         error: function (data) {

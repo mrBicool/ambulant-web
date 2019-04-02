@@ -31,7 +31,7 @@
                         <div class="chat-section">
                             <h5 class="chat-title">Recent</h5>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-1.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-1.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name">Jordan Hurst</span>
                                     <span class="prev-chat">What good's a reward if...</span>
@@ -39,7 +39,7 @@
                                 <span class="status online"><span></span></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-2.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-2.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name">Harriet Douglas</span>
                                     <span class="prev-chat">Don't talk to me, stranger...</span>
@@ -47,7 +47,7 @@
                                 <span class="status no-disturb"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-3.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-3.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name">Victoria Clayton</span>
                                     <span class="prev-chat">Well, the Force is what...</span>
@@ -55,7 +55,7 @@
                                 <span class="status away"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-6.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-6.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name">Michael Birch</span>
                                     <span class="prev-chat">Good. Use your aggressive...</span>
@@ -66,42 +66,42 @@
                         <div class="chat-section">
                             <h5 class="chat-title">Members</h5>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-4.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-4.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Samuel Field</span>
                                 </div>
                                 <span class="status"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-5.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-5.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Jennifer Watkins</span>
                                 </div>
                                 <span class="status"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-6.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-6.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Michael Birch</span>
                                 </div>
                                 <span class="status"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-10.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-10.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Renee Edwards</span>
                                 </div>
                                 <span class="status"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-11.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-11.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Kathy White</span>
                                 </div>
                                 <span class="status"></span>
                             </a>
                             <a href="javascript:void(0);" class="chat-user chat-toggle">
-                                <img class="thumb-img" src="assets/images/avatars/thumb-9.jpg" alt="">
+                                <img class="thumb-img" src="/assets/images/avatars/thumb-9.jpg" alt="">
                                 <div class="user-info">
                                     <span class="user-name pdd-top-5">Daryl Ellis</span>
                                 </div>
@@ -166,7 +166,7 @@
                             <div class="text-center mrg-top-20">
                                 <div class="row">
                                     <div class="col-md-6 ml-auto mr-auto text-center">
-                                        <img class="img-fluid border-radius-round" src="assets/images/avatars/user-1.jpg" alt="">
+                                        <img class="img-fluid border-radius-round" src="/assets/images/avatars/user-1.jpg" alt="">
                                     </div>
                                 </div>
                                 <h4 class="mrg-top-20">Nate Leong</h4>
@@ -230,7 +230,7 @@
                         <ul class="list-unstyled list-info">
                             <li>
                                 <a href="#">
-                                    <img class="thumb-img" src="assets/images/avatars/thumb-1.jpg" alt="">
+                                    <img class="thumb-img" src="/assets/images/avatars/thumb-1.jpg" alt="">
                                     <div class="info">
                                         <span class="title">Jordan Hurst</span>
                                         <span class="sub-title">have send you a request</span>
@@ -240,7 +240,7 @@
                             </li>
                             <li>
                                 <a href="#">
-                                    <img class="thumb-img" src="assets/images/avatars/thumb-4.jpg" alt="">
+                                    <img class="thumb-img" src="/assets/images/avatars/thumb-4.jpg" alt="">
                                     <div class="info">
                                         <span class="title">Samuel Field</span>
                                         <span class="sub-title">have send you a request</span>

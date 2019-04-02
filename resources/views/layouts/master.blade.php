@@ -68,7 +68,7 @@
     <script src="/assets/js/vendor.js"></script> 
     <script src="/assets/js/app.min.js"></script> 
     <script src="/js/plugins/iziToast.min.js"></script> 
-    <script src="js/config.js"></script>
+    <script src="/js/config.js"></script>
     <!-- page js -->
     @yield('js')
 </body>

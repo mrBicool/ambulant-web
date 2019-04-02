@@ -15,9 +15,7 @@ function getSubCategories(){
         if(response.success == false){
             if(response.status == 401){
                 clearStorage(); 
-                showError('UNAUTHORIZED ACCESS','', function(){ 
-                    redirectTo('/login');
-                });
+                redirectTo('/login'); 
                 return;
             }
 
@@ -59,11 +57,7 @@ function displayCategories(data){
 }
 
 function btnCategory(){
-    $('.card.mrg-btm-15.scroll-to').on('click', function(){
-        console.log('....' + $(this).data('group-id'));
-        showSuccess(''+$(this).data('group-desc'),'', function(){
-
-        });
+    $('.card.mrg-btm-15.scroll-to').on('click', function(){ 
         setStorage('selected-sub-category', $(this).data('group-id'));
         redirectTo('/sub-category/products');
     });

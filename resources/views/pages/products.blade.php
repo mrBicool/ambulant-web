@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('js')
-    <script src="js/pages/products.js"></script>
+    <script src="/js/pages/products.js"></script>
 @endsection
 
 @section('content')
