@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log('login.js'); 
+    cl(['login.js']); 
     if(isLogin()){
         redirectTo('/');
         return;
@@ -7,8 +7,7 @@ $(document).ready(function(){
 });
 
 function btnLogin(){
-    $('#btn-login').on('click', function(){
-        console.log('clicked');
+    $('#btn-login').on('click', function(){ 
         var username = $('#username');
         var password = $('#password');
 
@@ -38,22 +37,15 @@ function login(username, password){
     };
 
     post('/login', data, function(response){
-        if(response.success == false){
-            if(response.status == 500){
-                showWarning('',response.message, function(){});
-                return;
-            }
-            if(response.status == 401){
-                showError('',response.message, function(){
-                    // redirectTo('/login');
-                });
-                return;
-            }
+        if(response.success == false){ 
+            showWarning('',response.message, function(){});
+            return; 
         }
-        console.log(response);
+        cl([response]);
         setStorage('api_token', response.data.api_token);
         setStorage('name', response.data.name);
         setStorage('outlet', JSON.stringify(response.data.outlet));
+        init();
         redirectTo('/');
     });
 }

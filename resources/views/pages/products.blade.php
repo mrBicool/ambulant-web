@@ -10,7 +10,7 @@
         <li class="breadcrumb-item"><a href="/">Category</a></li>
         <li class="breadcrumb-item"><a href="/sub-category">Sub-Category</a></li>
         <li class="breadcrumb-item active" aria-current="page">Products</li>
-    </ol>
+    </ol> 
 </nav>
 <br>
 <div class="container">

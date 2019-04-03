@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log('sub-category.js'); 
+    cl(['sub-category.js']); 
     if(!isLogin()){
         redirectTo('/login');
         return;
@@ -12,18 +12,12 @@ function getSubCategories(){
     postWithHeader(routes.subCategories, {
         group_id: getStorage('selected-category')
     }, function(response){
-        if(response.success == false){
-            if(response.status == 401){
-                clearStorage(); 
-                redirectTo('/login'); 
-                return;
-            }
-
+        if(response.success == false){  
             showError('',response.message, function(){
             });
             return;
         }
-        console.log(response.data); 
+        cl([response.data]); 
         displayCategories(response.data);
     });
 }
@@ -35,7 +29,7 @@ function displayCategories(data){
     cc.empty();
 
     $.each(data, function(k,v){
-        console.log(k,v);
+        cl([k,v]);
         cc.append(
             '<div class="col-md-4">'+
                 '<a href="#'+v.category_id+'" class="card mrg-btm-15 scroll-to" data-group-id="'+v.category_id+'" data-group-desc="'+v.description+'">'+

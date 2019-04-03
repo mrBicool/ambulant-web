@@ -1,7 +1,6 @@
 "use strict";
 
-$(document).ready(function(){
-
+$(document).ready(function(){ 
     //
     $('.ui.dropdown').dropdown();
  
@@ -25,7 +24,8 @@ var routes = {
     categories:         '/outlet/category',
     subCategories:      '/outlet/category/sub-category',
     products:           '/outlet/category/sub-category/products',
-    product:            '/product'
+    product:            '/product',
+    productComponents:  '/product/components'
 };
 let main_cart;
 var main_cart_other;
@@ -43,6 +43,18 @@ function post(url, request, callback) {
             //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {
+
+            if(data.status == 401){
+                clearStorage(); 
+                redirectTo('/login');
+                return;
+            }
+
+            if(data.status == 500){
+                showWarning('',data.message, function(){});
+                return;
+            } 
+
             callback(data);
         },
         error: function (data) {
@@ -69,7 +81,18 @@ function postWithHeader(url, request, callback) {
             //xhr.setRequestHeader('Authorization', 'Bearer '+getStorage('api_token') );
         },
         success: function (data) {
-            console.log(data);
+
+            if(data.status == 401){
+                clearStorage();
+                redirectTo('/login');
+                return;
+            }
+
+            if(data.status == 500){
+                showWarning('',data.message, function(){});
+                return;
+            }
+
             callback(data);
         },
         error: function (data) {
@@ -90,7 +113,8 @@ function get(url, request, callback) {
         headers: {
             //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        success: function (data) {
+        success: function (data) {  
+
             callback(data);
         },
         error: function (data) {
@@ -233,25 +257,6 @@ function cl(arr = arr() ){
     });
 }
 
-function btnLogin(){
-    $('#btn-login').on('click',function(){
-        window.location.href = '/login';
-    });
-}
-
-function btnLogout() {
-    $('.btn-logout').on('click', function () {
-        console.log('btn-logout clicked...');
-        logout();
-    });
-}
-
-//global app functionalities
- 
-function showStoreOutletName(){
-    return getStorage('outlet_name');
-}
-
 function text_truncate(str, length, ending) {
     if (length == null) {
       length = 100;
@@ -293,15 +298,36 @@ function getBase64Image(img) {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
 
-function updateClock() {
-    $('#clock').html(moment().format('D. MMMM h:mm:ss A'));
-}
-
 function numberWithCommas(number) {
+    number = number.toFixed(2);
     var parts = number.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
 } 
+
+//=======================================================================
+
+function btnLogin(){
+    $('#btn-login').on('click',function(){
+        window.location.href = '/login';
+    });
+}
+
+function btnLogout() {
+    $('.btn-logout').on('click', function () { 
+        logout();
+    });
+}
+
+//global app functionalities
+ 
+function showStoreOutletName(){
+    return getStorage('outlet_name');
+} 
+
+function updateClock() {
+    $('#clock').html(moment().format('D. MMMM h:mm:ss A'));
+}
 
 function printOS(data, response_data){
     console.log(data, response_data, response_data.orderslip_id); 
@@ -571,4 +597,9 @@ function printOS(data, response_data){
         );
     // }
 
+}
+
+function init(){ 
+    var product_order = [];
+    setStorage('product_order', JSON.stringify(product_order)); 
 }

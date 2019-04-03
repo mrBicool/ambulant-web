@@ -1,6 +1,6 @@
 "use strict"
 $(document).ready(function(){
-    console.log('sub-category.js'); 
+    cl(['sub-category.js']); 
     if(!isLogin()){
         redirectTo('/login');
         return;
@@ -17,13 +17,8 @@ function getProducts(){
         category_id: getStorage('selected-sub-category'),
         page : paginate_counter
     }, function(response){
-        if(response.success == false){
-            if(response.status == 401){
-                clearStorage(); 
-                redirectTo('/login');
-                return;
-            }
-
+        
+        if(response.success == false){ 
             showError('',response.message, function(){
             });
             return;

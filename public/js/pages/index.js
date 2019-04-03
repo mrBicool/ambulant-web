@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    console.log('login.js'); 
+$(document).ready(function(){ 
+    cl(['login.js']);
     if(!isLogin()){
         redirectTo('/login');
         return;
@@ -10,18 +10,12 @@ $(document).ready(function(){
 
 function getCategories(){
     postWithHeader(routes.categories, {}, function(response){
-        if(response.success == false){
-            if(response.status == 401){
-                clearStorage(); 
-                redirectTo('/login'); 
-                return;
-            }
-
+        if(response.success == false){  
             showError('',response.message, function(){
             });
             return;
         }
-        console.log(response.data);
+        cl([response.data]);
         displayCategories(response.data);
     });
 }
@@ -32,8 +26,7 @@ function displayCategories(data){
 
     cc.empty();
 
-    $.each(data, function(k,v){
-        console.log(k,v);
+    $.each(data, function(k,v){ 
         cc.append(
             '<div class="col-md-4">'+
                 '<a href="#'+v.group_id+'" class="card mrg-btm-15 scroll-to" data-group-id="'+v.group_id+'" data-group-desc="'+v.description+'">'+
