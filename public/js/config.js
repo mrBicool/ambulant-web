@@ -44,11 +44,11 @@ function post(url, request, callback) {
         },
         success: function (data) {
 
-            if(data.status == 401){
-                clearStorage(); 
-                redirectTo('/login');
-                return;
-            }
+            // if(data.status == 401){
+            //     clearStorage(); 
+            //     redirectTo('/login');
+            //     return;
+            // }
 
             if(data.status == 500){
                 showWarning('',data.message, function(){});

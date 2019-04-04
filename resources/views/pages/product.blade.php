@@ -42,42 +42,44 @@
                                     <label for="is_takeout">Is Takeout?</label>
                                 </div> 
 
-                                <div class="mrg-top-0">
-                                    <div id="accordion-ask-2" class="accordion border-less" role="tablist" aria-multiselectable="true">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-ask-2" href="#collapse-ask-2" aria-expanded="false">
-                                                        <span>Product Component(1)</span>
-                                                        <i class="icon ti-arrow-circle-down"></i> 
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse-ask-2" class="panel-collapse collapse" style="">
-                                                <div class="panel-body"> 
-                                                    <div class="row border bottom">
-                                                        <div class="col-md-8">
-                                                            </span>
-                                                            <span class="mrg-left-0 font-size-14 text-dark ">BABY BCK RIBS ML (₱ 0.00)</span>
-                                                        </div>
-                                                        <div class="col-md-4 text-right">
-                                                            <p class="mrg-top-10">
-                                                                <span>(0)</span>
-                                                                <a href="#" class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
-                                                                    <i class="fa fa-minus"></i>
-                                                                </a>
-                                                                <a href="#" class="btn btn-success btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
+                                <div class="components-container">
+                                    {{-- <div class="mrg-top-0">
+                                        <div id="accordion-ask-2" class="accordion border-less" role="tablist" aria-multiselectable="true">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion-ask-2" href="#collapse-ask-2" aria-expanded="false">
+                                                            <span>Product Component(1)</span>
+                                                            <i class="icon ti-arrow-circle-down"></i> 
+                                                        </a>
+                                                    </h4>
                                                 </div>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
+                                                <div id="collapse-ask-2" class="panel-collapse collapse" style="">
+                                                    <div class="panel-body"> 
+                                                        <div class="row border bottom">
+                                                            <div class="col-md-8">
+                                                                </span>
+                                                                <span class="mrg-left-0 font-size-14 text-dark ">BABY BCK RIBS ML (₱ 0.00)</span>
+                                                            </div>
+                                                            <div class="col-md-4 text-right">
+                                                                <p class="mrg-top-10">
+                                                                    <span>(0)</span>
+                                                                    <a href="#" class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </a>
+                                                                    <a href="#" class="btn btn-success btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div> --}}
+                                </div> 
 
                                 <div class="mrg-top-0">
                                     <div id="accordion-ask-1" class="accordion border-less" role="tablist" aria-multiselectable="true">
