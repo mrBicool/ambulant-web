@@ -155,6 +155,7 @@ function getComponentsOfProduct(){
             return;
         }  
         componentsDisplayer(response.result.data);
+        
     });
 }
 
@@ -180,6 +181,7 @@ function componentsDisplayer(data){
             is_take_out : false,
         });  
 
+        var _id = po[0].product_id+'-'+v.product_id;
         cc.append(
             '<div class="mrg-top-0">'+
                 '<div id="accordion-cc-'+k+'" class="accordion border-less" role="tablist" aria-multiselectable="true">'+
@@ -187,31 +189,13 @@ function componentsDisplayer(data){
                         '<div class="panel-heading" role="tab">'+
                             '<h4 class="panel-title">'+
                                 '<a class="collapsed" data-toggle="collapse" data-parent="#accordion-cc-'+k+'" href="#collapse-cc-'+k+'" aria-expanded="false">'+
-                                    '<span>'+v.description+' | <i id="'+po[0].product_id+'-'+v.product_id+'">'+v.quantity+'</i></span>'+
+                                    '<span>'+v.description+' | <i id="'+_id+'">'+v.quantity+'</i></span>'+
                                     '<i class="icon ti-arrow-circle-down"></i> '+
                                 '</a>'+
                             '</h4>'+
                         '</div>'+
                         '<div id="collapse-cc-'+k+'" class="panel-collapse collapse" style="">'+
-                            '<div class="panel-body"> '+
-                                '<div class="row border bottom">'+
-                                    '<div class="col-md-8">'+
-                                        '</span>'+
-                                        '<span class="mrg-left-0 font-size-14 text-dark ">BABY BCK RIBS ML (₱ 0.00)</span>'+
-                                    '</div>'+
-                                    '<div class="col-md-4 text-right">'+
-                                        '<p class="mrg-top-10">'+
-                                            '<span>(0)</span>'+
-                                            '<a href="#" class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">'+
-                                                '<i class="fa fa-minus"></i>'+
-                                            '</a>'+
-                                            '<a href="#" class="btn btn-success btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">'+
-                                                '<i class="fa fa-plus"></i>'+
-                                            '</a>'+
-                                        '</p>'+
-                                    '</div>'+
-                                '</div>'+
-
+                            '<div class="panel-body" id="'+_id+'-categories'+'"> '+ 
                             '</div>'+
                         '</div>'+
                     '</div> '+
@@ -219,10 +203,82 @@ function componentsDisplayer(data){
             '</div>'
         );
 
+        getComponentCategories(v.product_id, _id+'-categories');
     });
-    setStorage('product_order', JSON.stringify(po));
-
+    setStorage('product_order', JSON.stringify(po)); 
 } 
+
+function getComponentCategories(product_id,container){
+    let outlet = JSON.parse(getStorage('outlet'));  
+    let data = {
+        product_id  : product_id,
+        outlet_id   : outlet.id
+    }; 
+    postWithHeader(routes.productComponentCategories, data, function(response){
+        if(response.success == false){ 
+            showError('',response.message, function(){
+            });
+            return;
+        }
+         
+        componentCategoriesDisplayer(response.result.product,response.result.categories.data,container);
+    });
+}
+
+function componentCategoriesDisplayer(product,data,container){
+    var c = $('#'+container);
+    c.empty();
+    $.each(data, function(k,v){ 
+
+        if(v.price <= product.price){
+            v.price = 0;
+        }else{
+            v.price = v.price - product.price;
+        }
+
+        var _id = container+'-'+v.product_id;
+        c.append(
+            '<div class="row border bottom">'+
+                '<div class="col-md-8">'+
+                    '</span>'+
+                    '<span class="mrg-left-0 font-size-14 text-dark ">'+v.short_code+' (₱ '+ numberWithCommas(v.price)+')</span>'+
+                '</div>'+
+                '<div class="col-md-4 text-right">'+
+                    '<p class="mrg-top-10">'+
+                        '<span>(0)</span>'+
+                        '<button '+
+                        'id="'+_id+'" '+ 
+                        'data-main_product_component_id="'+product.product_id+'" '+ 
+                        'data-main_product_id="'+getStorage('selected-product')+'" '+
+                        'data-name="'+v.short_code+'" '+
+                        'data-price="'+v.price+'" '+
+                        'data-product_id="'+v.product_id+'" '+
+                        'class="btn btn-danger btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">'+
+                            '<i class="fa fa-minus"></i>'+
+                        '</button> '+ 
+                        '<button '+ 
+                        'id="'+_id+'" '+
+                        'data-main_product_component_id="'+product.product_id+'" '+ 
+                        'data-main_product_id="'+getStorage('selected-product')+'" '+
+                        'data-name="'+v.short_code+'" '+
+                        'data-price="'+v.price+'" '+
+                        'data-product_id="'+v.product_id+'" '+
+                        'class="btn btn-success btn-inverse btn-xs no-mrg-btm mrg-left-10 border-radius-4">'+
+                            '<i class="fa fa-plus"></i>'+
+                        '</button>'+
+                    '</p>'+
+                '</div>'+
+            '</div>'
+        );
+        btnComponentCategoryMinus(_id);
+    });
+}
+
+function btnComponentCategoryMinus(id){
+    $('#'+id).on('click', function(){
+        cl([ $(this)]);
+    });
+}
 
 function logicDisplay(){ 
     var grand_total = 0; 

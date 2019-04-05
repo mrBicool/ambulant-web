@@ -30,8 +30,8 @@
                                             <div class="input-group">
                                                 <input id="m-product-qty" type="text" class="form-control" placeholder="Qty" value="1" disabled>
                                                 <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-outline-secondary" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
-                                                    <button class="btn btn-outline-secondary" type="button" id="btn-m-plus"><i class="ti-plus"></i></button>
+                                                    <button class="btn btn-warning" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
+                                                    <button class="btn btn-success" type="button" id="btn-m-plus"><i class="ti-plus"></i></button>
                                                 </div>
                                             </div>
                                     </div>
@@ -97,7 +97,7 @@
                                                         <textarea class="form-control" rows="3" id="instruction"></textarea>
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div> 
 
@@ -111,7 +111,7 @@
                                 TOTAL : 0.00
                             </li>
                             <li class="list-inline-item">
-                                <a href="#" class="btn btn-flat btn-info add-to-order">Add to Order</a>
+                                <button class="btn btn-flat btn-info add-to-order">Add to Order</button>
                             </li>
                         </ul>
                     </div>

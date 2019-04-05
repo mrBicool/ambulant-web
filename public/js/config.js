@@ -20,18 +20,19 @@ $(document).ready(function(){
 var api = 'http://172.16.12.130:8005/api';
 var local_printer_api = "http://instafood-printer.dsc:8082/api";
 var routes = {
-    login:              '/login',
-    categories:         '/outlet/category',
-    subCategories:      '/outlet/category/sub-category',
-    products:           '/outlet/category/sub-category/products',
-    product:            '/product',
-    productComponents:  '/product/components'
+    login:                      '/login',
+    categories:                 '/outlet/category',
+    subCategories:              '/outlet/category/sub-category',
+    products:                   '/outlet/category/sub-category/products',
+    product:                    '/product',
+    productComponents:          '/product/components',
+    productComponentCategories: '/product/component/categories'
 };
 let main_cart;
 var main_cart_other;
 
 //
-// Requests GET | POST 
+// Requests GET | POST
 //
 function post(url, request, callback) {
     $.ajax({
