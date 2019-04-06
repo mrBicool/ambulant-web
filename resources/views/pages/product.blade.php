@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', "") 
 
 @section('js')
     <script src="/js/pages/product.js"></script>
@@ -30,7 +31,7 @@
                                             <div class="input-group">
                                                 <input id="m-product-qty" type="text" class="form-control" placeholder="Qty" value="1" disabled>
                                                 <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-warning" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
+                                                    <button class="btn btn-danger" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
                                                     <button class="btn btn-success" type="button" id="btn-m-plus"><i class="ti-plus"></i></button>
                                                 </div>
                                             </div>

@@ -43,7 +43,7 @@
                                                     <div class="pdd-horizon-30 pdd-vertical-30">
                                                         <div class="mrg-btm-30">
                                                             <div class="img-responsive inline-block"></div>
-                                                            {{-- <img class="img-responsive inline-block" src="assets/images/logo/logo.png" alt=""> --}}
+                                                            <img class="img-responsive inline-block" src="/assets/images/logo/logo.png" alt="">
                                                             <h2 class="inline-block pull-right no-mrg-vertical pdd-top-15">Login</h2>
                                                         </div>
                                                         <p class="mrg-btm-15 font-size-13">Please enter your user name and password to login</p>

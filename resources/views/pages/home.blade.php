@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Category')  
 
 @section('js')
     <script src="js/pages/index.js"></script>

@@ -16,3 +16,4 @@ Route::get('/',                     'PagesController@home');
 Route::get('/sub-category',         'PagesController@subCategory');
 Route::get('/sub-category/products','PagesController@products');
 Route::get('/product',              'PagesController@product');
+Route::get('/my-order',             'PagesController@myOrder');

@@ -14,7 +14,15 @@
         </div>
         <ul class="side-nav-menu scrollable">
             <li class="nav-item">
-                <a class="mrg-top-30" href="#">
+                <a class="mrg-top-30" href="/">
+                    <span class="icon-holder">
+                        <i class="ti-home"></i>
+                    </span>
+                    <span class="title">Category</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="" href="/my-order">
                     <span class="icon-holder">
                         <i class="ti-shopping-cart"></i>
                     </span>

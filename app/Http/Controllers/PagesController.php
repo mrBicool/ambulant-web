@@ -26,4 +26,8 @@ class PagesController extends Controller
     public function product(){
         return view('pages.product');
     }
+
+    public function myOrder(){
+        return view('pages.my-order');
+    }
 }

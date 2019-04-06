@@ -26,7 +26,8 @@ var routes = {
     products:                   '/outlet/category/sub-category/products',
     product:                    '/product',
     productComponents:          '/product/components',
-    productComponentCategories: '/product/component/categories'
+    productComponentCategories: '/product/component/categories',
+    orderSlip:                  '/orderslip'
 };
 let main_cart;
 var main_cart_other;
@@ -601,6 +602,6 @@ function printOS(data, response_data){
 }
 
 function init(){ 
-    var product_order = [];
+    var product_order = null;
     setStorage('product_order', JSON.stringify(product_order)); 
 }

@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title', 'Sub Category')  
 
 @section('js')
     <script src="js/pages/sub-category.js"></script>
