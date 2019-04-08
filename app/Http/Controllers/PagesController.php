@@ -30,4 +30,12 @@ class PagesController extends Controller
     public function myOrder(){
         return view('pages.my-order');
     }
+
+    public function pendingOrder(){
+        return view('pages.pending-order');
+    }
+
+    public function completedOrder(){
+        return view('pages.completed-order');
+    }
 }

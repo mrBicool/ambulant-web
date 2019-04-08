@@ -17,3 +17,6 @@ Route::get('/sub-category',         'PagesController@subCategory');
 Route::get('/sub-category/products','PagesController@products');
 Route::get('/product',              'PagesController@product');
 Route::get('/my-order',             'PagesController@myOrder');
+
+Route::get('/pending-order',              'PagesController@pendingOrder');
+Route::get('/completed-order',            'PagesController@completedOrder');

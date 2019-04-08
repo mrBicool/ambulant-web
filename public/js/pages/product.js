@@ -40,12 +40,13 @@ function displayProduct(data){
         name : data.short_code,
         price : data.price,
         qty : 1,
-        // main_product_id : parseInt(data.product_id),
-        // main_product_component_id : null,
-        // main_product_component_qty : null,
+        main_product_id : parseInt(data.product_id),
+        main_product_component_id : null,
+        main_product_component_qty : null,
         total : (1 * data.price),
         instruction : "",
         is_take_out : false,
+        part_number : data.part_number,
         others:[]
     };  
 
@@ -102,7 +103,7 @@ $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){
     var po = JSON.parse( getStorage('product_order') );
 
     cl([po]);
-    postWithHeader(routes.orderSlip,{data:po}, function(response){
+    postWithHeader(routes.orderSlip, po , function(response){
         console.log(response);
         showSuccess('','Added Successfully!', function(){ 
         }); 
@@ -144,6 +145,7 @@ function componentsDisplayer(data){
             main_product_component_id : parseInt(v.product_id),
             main_product_component_qty : v.quantity,
             total : (v.quantity * 0), 
+            part_number : v.product_partno,
             others: []
         });
 
@@ -324,7 +326,8 @@ function btnComponentCategoryPlus(id){
                             main_product_component_qty : v.quantity,
                             main_product_component_id : parseInt(v.product_id),
                             
-                            total : (data.price * 1)
+                            total : (data.price * 1),
+                            part_number : v.part_number,
                         });
                         v.qty -= 1; 
                     }

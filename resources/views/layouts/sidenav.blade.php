@@ -41,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>  
-                        <a href="#pending">
+                        <a href="/pending-order">
                             <span class="icon-holder">
                                 <i class="ti-reload"></i>
                             </span>
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#completed">
+                        <a href="/completed-order">
                             <span class="icon-holder">
                                 <i class="ti-check"></i>
                             </span>
