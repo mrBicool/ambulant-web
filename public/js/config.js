@@ -27,7 +27,8 @@ var routes = {
     product:                    '/product',
     productComponents:          '/product/components',
     productComponentCategories: '/product/component/categories',
-    orderSlip:                  '/orderslip'
+    orderSlip:                  '/orderslip',
+    orderSlipActive:            '/orderslip/active'
 };
 let main_cart;
 var main_cart_other;
@@ -116,6 +117,40 @@ function get(url, request, callback) {
             //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {  
+
+            callback(data);
+        },
+        error: function (data) {
+            showError('Server error', 'Please ask the system administrator about this problem!', function () {
+
+            });
+        }
+    });
+}
+
+function getWithHeader(url, request, callback) {
+    $.ajax({
+        url: api + url,
+        type: "GET",
+        dataType: "json",
+        data: request,
+        headers: {
+            //'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Authorization':    'Bearer '+getStorage('api_token'),
+            'Accept':           'application/json'
+        },
+        success: function (data) {  
+            
+            if(data.status == 401){
+                clearStorage();
+                redirectTo('/login');
+                return;
+            }
+
+            if(data.status == 500){
+                showWarning('',data.message, function(){});
+                return;
+            }
 
             callback(data);
         },
