@@ -28,7 +28,8 @@ var routes = {
     productComponents:          '/product/components',
     productComponentCategories: '/product/component/categories',
     orderSlip:                  '/orderslip',
-    orderSlipActive:            '/orderslip/active'
+    orderSlipActive:            '/orderslip/active',
+    customerSearch:             '/customer/search'
 };
 let main_cart;
 var main_cart_other;

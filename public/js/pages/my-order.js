@@ -13,6 +13,7 @@ function getOrders(){
         if(response.success == true){ 
             cl([response]);
             osDisplayer(response.result.header,response.result.details);
+            
         }
     });
 }
@@ -105,5 +106,82 @@ function osDisplayer(header, details){
     os_container.append(os_txt);
 
     //total  
-    $('#sub-total').text( numberWithCommas(sub_total) + '' );
+    $('#sub-total').text( numberWithCommas(sub_total) + '' ); 
+
+    // headcounts
+    $('#head-count').val(header.total_hc);
+
+    // customer info
+
+    setStorage('order-slip', JSON.stringify({ header , details }));
 }
+
+$('#btn-head-count-minus').on('click', function(){
+    var hc = parseInt($('#head-count').val());
+
+    // logic
+    if(hc > 1){
+        hc--;
+    } 
+    // save
+    var os = JSON.parse( getStorage('order-slip') );
+    os.header.total_hc = hc;  
+    setStorage('order-slip', JSON.stringify(os));
+    // show new value
+    $('#head-count').val(hc);
+});
+
+$('#btn-head-count-plus').on('click', function(){
+    var hc = parseInt($('#head-count').val());
+    
+    // logic
+    hc++;
+    // save
+    var os = JSON.parse( getStorage('order-slip') );
+    os.header.total_hc = hc;  
+    setStorage('order-slip', JSON.stringify(os));
+    // show new value
+    $('#head-count').val(hc);
+});
+
+$('#btn-search').on('click', function(){
+    cl(['clicked']);
+    var mobile_number = $('#mobile-number');
+    
+    var data = {
+        search_by : "mobile_number",
+        mobile_number : mobile_number.val()
+    };
+    getWithHeader(routes.customerSearch, data, function(response){
+        cl([response]);
+        var hide_customer = $('#hide-customer');
+        var show_customer = $('#show-customer');
+
+        if(response.success == false){ 
+            // logic
+            var os = JSON.parse( getStorage('order-slip') );
+            os.header.customer_id = null;
+            os.header.customer_name = null;
+            os.header.mobile_number = null; 
+            // save 
+            setStorage('order-slip', JSON.stringify(os));
+            // display
+            hide_customer.show();
+            show_customer.hide();
+            return;
+        } 
+        // logic
+        var os = JSON.parse( getStorage('order-slip') );
+        os.header.customer_id = response.result.customer_id;
+        os.header.customer_name = response.result.name;
+        os.header.mobile_number = response.result.mobile_number; 
+        // save
+        setStorage('order-slip', JSON.stringify(os));
+        // display
+        hide_customer.hide();
+        show_customer.show();
+        $('#customer-name').text(response.result.name);
+        $('#customer-points').text(numberWithCommas(response.result.points));
+        $('#customer-wallet').text(numberWithCommas(response.result.wallet));
+    });
+});

@@ -100,8 +100,8 @@
                                             <div class="input-group input-group-sm"> 
                                                 <input id="head-count" type="text" class="form-control input-sm" placeholder="Qty" value="1" disabled="" >
                                                 <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-default btn-xs" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
-                                                    <button class="btn btn-default" type="button" id="btn-m-plus"><i class="ti-plus"></i></button>
+                                                    <button class="btn btn-default btn-xs" type="button" id="btn-head-count-minus"><i class="ti-minus"></i></button>
+                                                    <button class="btn btn-default" type="button" id="btn-head-count-plus"><i class="ti-plus"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,16 +111,75 @@
                             <div class="col-md-6">
                                 <div class="mrg-top-1">
                                     <div class="form-group">
-                                        <label for="head-count">Search Customer</label>
+                                        <label for="mobile-number">Search Customer</label>
                                         <div class="input-group input-group-sm"> 
                                             <input id="mobile-number" type="text" class="form-control input-sm" placeholder="Enter mobile number" value="" >
                                             <div class="input-group-append" id="button-addon4">
-                                                <button class="btn btn-default btn-xs" type="button" id="btn-m-minus"><i class="ti-search"></i> Search</button>
+                                                <button class="btn btn-default btn-xs" type="button" id="btn-search"><i class="ti-search"></i> Search</button>
                                                
                                             </div>
                                         </div>
                                     </div>
-                                        
+                                    <div class="card"> 
+                                            <div class="card-body">
+                                                    <div id="hide-customer" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <span class="font-size-30">:(</span>
+                                                                <div>No record was found.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div id="show-customer" style="display:none;">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <ul class="list-unstyled list-info">
+                                                                    <li>
+                                                                        <span class="thumb-img pdd-top-10">
+                                                                                <i class="ti-user font-size-30"></i>
+                                                                            </span>
+                                                                        <div class="info">
+                                                                            <b class="text-dark font-size-16">Name</b>
+                                                                            <p id="customer-name">...</p>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <ul class="list-unstyled list-info">
+                                                                    <li>
+                                                                        <span class="thumb-img pdd-top-10">
+                                                                                <i class="ti-gift font-size-30"></i>
+                                                                            </span>
+                                                                        <div class="info">
+                                                                            <b class="text-dark font-size-16">Earned Point's</b>
+                                                                            <p id="customer-points">0.00</p>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <ul class="list-unstyled list-info">
+                                                                    <li>
+                                                                        <span class="thumb-img pdd-top-10">
+                                                                                <i class="ti-wallet font-size-30"></i>
+                                                                            </span>
+                                                                        <div class="info">
+                                                                            <b class="text-dark font-size-16">Wallet Balance</b>
+                                                                            <p id="customer-wallet">0.00</p>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                    
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
