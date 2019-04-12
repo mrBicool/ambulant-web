@@ -16,7 +16,7 @@
     <div class="row" id="container">
         <div class="col-md-12 text-center if-has-no-pending-order" style="display:none;">
             <span class="font-size-30">:(</span>
-            <div>No record.</div>
+            <div>No record was found</div>
         </div>
         <div class="col-md-12 if-has-pending-order" style="display:none;">
             <div class="card">
@@ -126,7 +126,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12 text-center">
                                                                 <span class="font-size-30">:(</span>
-                                                                <div>No record was found.</div>
+                                                                <div>No record was found</div>
                                                             </div>
                                                         </div>
                                                     </div> 
@@ -161,7 +161,7 @@
                                                                 </ul>
                                                             </div> 
                                                         </div>
-                                                        <div class="row">
+                                                        {{-- <div class="row">
                                                             <div class="col-md-12">
                                                                 <ul class="list-unstyled list-info">
                                                                     <li>
@@ -175,7 +175,7 @@
                                                                     </li>
                                                                 </ul>
                                                             </div> 
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     
                                             </div>
@@ -186,7 +186,7 @@
                         
                     </div>
                     <div class="card-footer border top">
-                        <button  class="btn btn-primary btn-sm pull-right ">
+                        <button id="btn-save-changes"  class="btn btn-primary btn-sm pull-right ">
                             Save change's
                         </button>
                         {{-- <ul class="list-unstyled list-inline text-right pdd-vertical-5">

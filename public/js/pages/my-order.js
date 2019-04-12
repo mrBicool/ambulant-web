@@ -44,64 +44,66 @@ function osDisplayer(header, details){
     var sub_total = 0;
     // details
     os_container.empty();
-    $.each(details, function(k,v){
-        
-        var total = 0;
-
-        os_txt += '<tr>'+
-            '<td width="">'+
-                '<div class="list-info">'+ 
-                    '<div class="thumb-img font-size-20">'; 
-        console.log(v);
-        // main
-        $.each(v, function(kk,vv){ 
-            if(vv.product_id == vv.main_product_id){
-                total += (vv.qty * vv.srp);
-                os_txt += vv.qty + 'X' +
-                    '</div>'+
-                    '<div class="info">'+
-                        '<span class="title">'+vv.name+'</span>';
-            }
-        });
-
-        // components
-            // sub components
+    $.each(details, function(_k, _v){
+        $.each(_v, function(k,v){ 
+            var total = 0;
+    
+            os_txt += '<tr>'+
+                '<td width="">'+
+                    '<div class="list-info">'+ 
+                        '<div class="thumb-img font-size-20">'; 
+            console.log(v);
+            // main
             $.each(v, function(kk,vv){ 
-                if(vv.product_id != vv.main_product_id){
+                if(vv.product_id == vv.main_product_id){
                     total += (vv.qty * vv.srp);
-                    const  _total = (vv.qty * vv.srp) <= 0 ? 'FREE' : (vv.qty * vv.srp);
-                    os_txt += 
-                            '<span class="sub-title">+ '+ vv.qty + 'x ' +vv.name+' ( '+ _total + ' )</span>';
+                    os_txt += vv.qty + 'X' +
+                        '</div>'+
+                        '<div class="info">'+
+                            '<span class="title">'+vv.name+'</span>';
                 }
             });
-
-        // instruction
-        $.each(v, function(kk,vv){ 
-            if(vv.product_id == vv.main_product_id){
-                 if(vv.remarks != null){
-                     os_txt += '<span class="sub-title">+ '+vv.remarks+'</span>';
-                 }
-            }
+    
+            // components
+                // sub components
+                $.each(v, function(kk,vv){ 
+                    if(vv.product_id != vv.main_product_id){
+                        total += (vv.qty * vv.srp);
+                        const  _total = (vv.qty * vv.srp) <= 0 ? 'FREE' : (vv.qty * vv.srp);
+                        os_txt += 
+                                '<span class="sub-title">+ '+ vv.qty + 'x ' +vv.name+' ( '+ _total + ' )</span>';
+                    }
+                });
+    
+            // instruction
+            $.each(v, function(kk,vv){ 
+                if(vv.product_id == vv.main_product_id){
+                     if(vv.remarks != null){
+                         os_txt += '<span class="sub-title">+ '+vv.remarks+'</span>';
+                     }
+                }
+            });
+    
+            os_txt += '</div>'+
+                    '</div>'+
+                '</td> '+
+                '<td width="30%" class="text-right">'+
+                    '<div class="relative mrg-top-10">  '+
+                        '<span class="pdd-right-20"> ('+ numberWithCommas(total) +') </span> '+
+                        '<button class="btn btn-info btn-sm">'+
+                                '<i class="ti-pencil"></i>'+
+                        '</button>'+
+                        '<button class="btn btn-danger btn-sm">'+
+                                '<i class="ti-trash"></i>'+
+                        '</button>'+
+                    '</div> '+
+                '</td>'+
+            '</tr>';
+    
+            sub_total += total;
         });
-
-        os_txt += '</div>'+
-                '</div>'+
-            '</td> '+
-            '<td width="30%" class="text-right">'+
-                '<div class="relative mrg-top-10">  '+
-                    '<span class="pdd-right-20"> ('+ numberWithCommas(total) +') </span> '+
-                    '<button class="btn btn-info btn-sm">'+
-                            '<i class="ti-pencil"></i>'+
-                    '</button>'+
-                    '<button class="btn btn-danger btn-sm">'+
-                            '<i class="ti-trash"></i>'+
-                    '</button>'+
-                '</div> '+
-            '</td>'+
-        '</tr>';
-
-        sub_total += total;
     });
+    
 
     os_container.append(os_txt);
 
@@ -182,6 +184,23 @@ $('#btn-search').on('click', function(){
         show_customer.show();
         $('#customer-name').text(response.result.name);
         $('#customer-points').text(numberWithCommas(response.result.points));
-        $('#customer-wallet').text(numberWithCommas(response.result.wallet));
+        // $('#customer-wallet').text(numberWithCommas(response.result.wallet));
+    });
+});
+
+$('#btn-save-changes').on('click', function(){
+    cl(['clicked']);
+    var os = JSON.parse( getStorage('order-slip') );
+    var data = {
+        _method : 'PATCH',
+        branch_id : os.header.branch_id,
+        orderslip_header_id : os.header.orderslip_header_id,
+        TOTALHEADCOUNT : os.header.total_hc,
+        CELLULARNUMBER : os.header.mobile_number,
+        CUSTOMERCODE : os.header.customer_id,
+        CUSTOMERNAME : os.header.customer_name
+    };
+    postWithHeader(routes.orderSlipHeader.patch, data, function(response){
+
     });
 });

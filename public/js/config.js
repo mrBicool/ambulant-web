@@ -29,7 +29,10 @@ var routes = {
     productComponentCategories: '/product/component/categories',
     orderSlip:                  '/orderslip',
     orderSlipActive:            '/orderslip/active',
-    customerSearch:             '/customer/search'
+    customerSearch:             '/customer/search',
+    orderSlipHeader: {
+        patch:                  '/orderslip/header'
+    }
 };
 let main_cart;
 var main_cart_other;
