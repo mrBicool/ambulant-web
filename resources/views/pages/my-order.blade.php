@@ -88,7 +88,7 @@
         <div class="col-md-12 if-has-pending-order" style="display:none;">
                 <div class="card">
                     <div class="card-heading">
-                        <h4 class="card-title">Other's</h4>
+                        <h4 class="card-title">Customer Info's</h4>
                     </div>
                     <div class="card-body">
                         

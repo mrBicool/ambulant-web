@@ -114,6 +114,11 @@ function osDisplayer(header, details){
     $('#head-count').val(header.total_hc);
 
     // customer info
+    if(header.mobile_number == null){
+        hideCustomerCard(); 
+    }else{
+        showCustomerCard(header.customer_name, header.mobile_number);
+    }
 
     setStorage('order-slip', JSON.stringify({ header , details }));
 }
@@ -155,9 +160,7 @@ $('#btn-search').on('click', function(){
         mobile_number : mobile_number.val()
     };
     getWithHeader(routes.customerSearch, data, function(response){
-        cl([response]);
-        var hide_customer = $('#hide-customer');
-        var show_customer = $('#show-customer');
+        cl([response]); 
 
         if(response.success == false){ 
             // logic
@@ -168,8 +171,7 @@ $('#btn-search').on('click', function(){
             // save 
             setStorage('order-slip', JSON.stringify(os));
             // display
-            hide_customer.show();
-            show_customer.hide();
+            hideCustomerCard();
             return;
         } 
         // logic
@@ -180,13 +182,28 @@ $('#btn-search').on('click', function(){
         // save
         setStorage('order-slip', JSON.stringify(os));
         // display
-        hide_customer.hide();
-        show_customer.show();
-        $('#customer-name').text(response.result.name);
-        $('#customer-points').text(numberWithCommas(response.result.points));
-        // $('#customer-wallet').text(numberWithCommas(response.result.wallet));
+        showCustomerCard(response.result.name,response.result.points);  
     });
 });
+
+
+function hideCustomerCard(){
+    var hide_customer = $('#hide-customer');
+    var show_customer = $('#show-customer');
+    hide_customer.show();
+    show_customer.hide(); 
+}
+
+function showCustomerCard(name='',points=0,wallet=0){
+    var hide_customer = $('#hide-customer');
+    var show_customer = $('#show-customer');
+    hide_customer.hide();
+    show_customer.show();
+    $('#customer-name').text(name);
+    $('#customer-points').text(numberWithCommas(points));
+    // $('#customer-wallet').text(numberWithCommas(response.result.wallet));
+}
+
 
 $('#btn-save-changes').on('click', function(){
     cl(['clicked']);
@@ -201,6 +218,15 @@ $('#btn-save-changes').on('click', function(){
         CUSTOMERNAME : os.header.customer_name
     };
     postWithHeader(routes.orderSlipHeader.patch, data, function(response){
+        if(response.success == false){
+            showWarning('', response.message, function(){
 
+            });
+            return;
+        }
+
+        showSuccess('', 'Changes has been save.', function(){
+
+        });
     });
 });
