@@ -106,11 +106,10 @@ function osDisplayer(header, details){
             '</tr>'; 
             sub_total += total;    
         });
-    });
-    
-    btnProductRemove();
+    }); 
 
     os_container.append(os_txt);
+    btnProductRemove();
 
     //total  
     $('#sub-total').text( numberWithCommas(sub_total) + '' ); 
@@ -124,15 +123,41 @@ function osDisplayer(header, details){
     if(header.mobile_number == null){
         hideCustomerCard(); 
     }else{
-        showCustomerCard(header
-            
-            .customer_name);
+        showCustomerCard(header.customer_name);
     }
 }
 
 function btnProductRemove(){
-    $('.btn.btn-danger.btn-sm.btn-product-remove').on('click', function(){ 
-        console.log('test');
+    $('.btn.btn-danger.btn-sm.btn-product-remove').on('click', function(){  
+        var header_id  = $(this).data('header-id');
+        var main_product_id = $(this).data('main-product-id');
+        var sequence = $(this).data('sequence'); 
+        console.log(header_id);
+        console.log(main_product_id);
+        console.log(sequence);
+
+        var os = JSON.parse( getStorage('order-slip') );
+        var data = {
+            _method : 'DELETE',
+            branch_id : os.header.branch_id,
+            header_id : header_id,
+            main_product_id : main_product_id,
+            sequence : sequence
+        };
+        postWithHeader(routes.orderSlipDetail.delete, data, function(response){ 
+            if(response.success == false){
+                showWarning('', response.message, function(){
+    
+                });
+                return;
+            }
+    
+            showSuccess('', response.message, function(){
+                 
+            });
+            getOrders();
+        });
+
     }); 
 }
  

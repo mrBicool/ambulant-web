@@ -32,6 +32,9 @@ var routes = {
     customerSearch:             '/customer/search',
     orderSlipHeader: {
         patch:                  '/orderslip/header'
+    },
+    orderSlipDetail: { 
+        delete:                 '/orderslip/details'
     }
 };
 let main_cart;
