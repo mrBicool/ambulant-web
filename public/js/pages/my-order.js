@@ -47,12 +47,13 @@ function osDisplayer(header, details){
     $.each(details, function(_k, _v){
         $.each(_v, function(k,v){ 
             var total = 0;
-    
+            var header_id = null;
+            var main_product_id = null;
+            var sequence = null;
             os_txt += '<tr>'+
                 '<td width="">'+
                     '<div class="list-info">'+ 
-                        '<div class="thumb-img font-size-20">'; 
-            console.log(v);
+                        '<div class="thumb-img font-size-20">';  
             // main
             $.each(v, function(kk,vv){ 
                 if(vv.product_id == vv.main_product_id){
@@ -61,6 +62,10 @@ function osDisplayer(header, details){
                         '</div>'+
                         '<div class="info">'+
                             '<span class="title">'+vv.name+'</span>';
+                    
+                        header_id = vv.orderslip_header_id;
+                        main_product_id = vv.main_product_id;
+                        sequence = vv.sequence;
                 }
             });
     
@@ -90,20 +95,20 @@ function osDisplayer(header, details){
                 '<td width="30%" class="text-right">'+
                     '<div class="relative mrg-top-10">  '+
                         '<span class="pdd-right-20"> ('+ numberWithCommas(total) +') </span> '+
-                        '<button class="btn btn-info btn-sm">'+
+                        '<button data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'" class="btn btn-info btn-sm">'+
                                 '<i class="ti-pencil"></i>'+
                         '</button>'+
-                        '<button class="btn btn-danger btn-sm">'+
+                        '<button class="btn btn-danger btn-sm btn-product-remove" id="'+main_product_id+'-'+sequence+'" data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'">'+
                                 '<i class="ti-trash"></i>'+
                         '</button>'+
                     '</div> '+
                 '</td>'+
-            '</tr>';
-    
-            sub_total += total;
+            '</tr>'; 
+            sub_total += total;    
         });
     });
     
+    btnProductRemove();
 
     os_container.append(os_txt);
 
@@ -119,11 +124,19 @@ function osDisplayer(header, details){
     if(header.mobile_number == null){
         hideCustomerCard(); 
     }else{
-        showCustomerCard(header.customer_name, header.mobile_number);
+        showCustomerCard(header
+            
+            .customer_name);
     }
-
-    
 }
+
+function btnProductRemove(){
+    $('.btn.btn-danger.btn-sm.btn-product-remove').on('click', function(){ 
+        console.log('test');
+    }); 
+}
+ 
+
 
 $('#btn-head-count-minus').on('click', function(){
     var hc = parseInt($('#head-count').val());

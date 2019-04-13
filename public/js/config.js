@@ -294,7 +294,7 @@ function validateContactNumber(value) {
 
 function cl(arr = arr() ){
     arr.forEach(element => {
-        console.log(element);
+        //console.log(element);
     });
 }
 
