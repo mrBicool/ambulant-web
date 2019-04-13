@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'My Order')  
 
-@section('js')
+@section('js') 
     <script src="js/pages/my-order.js"></script>
 @endsection
 
@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-heading">
                     <h4 class="card-title inline-block pdd-top-5">OS #: <i id="order-slip-id">null</i></h4>
-                    <button class="btn btn-success btn-sm pull-right no-mrg">
+                    <button class="btn-print-order-slip btn btn-success btn-sm pull-right no-mrg">
                             <i class="ti-printer"></i>
                     </button> 
                     <button  class="btn btn-primary btn-sm pull-right ">

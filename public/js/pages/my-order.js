@@ -113,6 +113,8 @@ function osDisplayer(header, details){
     // headcounts
     $('#head-count').val(header.total_hc);
 
+    setStorage('order-slip', JSON.stringify({ header , details }));
+
     // customer info
     if(header.mobile_number == null){
         hideCustomerCard(); 
@@ -120,7 +122,7 @@ function osDisplayer(header, details){
         showCustomerCard(header.customer_name, header.mobile_number);
     }
 
-    setStorage('order-slip', JSON.stringify({ header , details }));
+    
 }
 
 $('#btn-head-count-minus').on('click', function(){
@@ -228,5 +230,21 @@ $('#btn-save-changes').on('click', function(){
         showSuccess('', 'Changes has been save.', function(){
 
         });
+    });
+});
+
+$('.btn-print-order-slip').on('click', function(){
+    cl(['test']);
+    var os = JSON.parse( getStorage('order-slip') ); 
+    var data = {
+        header : 'Enchanted Kingdom',
+        os : os,
+        server_info : {
+            name : getStorage('name'), 
+        }, 
+        currency: 'PHP'
+    };
+    customPost(local_printer_api+'/print/order-slip',data, function(response){
+        cl([response]);
     });
 });
