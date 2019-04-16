@@ -38,4 +38,8 @@ class PagesController extends Controller
     public function completedOrder(){
         return view('pages.completed-order');
     }
+
+    public function editOrder(){
+        return view('pages.edit-order');
+    }
 }

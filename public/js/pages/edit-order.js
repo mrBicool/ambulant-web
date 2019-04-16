@@ -12,8 +12,9 @@ $(document).ready(function(){
 function getProduct(){ 
     //parse 
     let outlet = JSON.parse(getStorage('outlet'));  
+    let eos = JSON.parse(getStorage('edit-order-slip'));
     let data = {
-        product_id  : getStorage('selected-product'),
+        product_id  : eos.main_product_id,
         outlet_id   : outlet.id
     };
 
@@ -23,7 +24,8 @@ function getProduct(){
             });
             return;
         }
-  
+        
+        console.log(response);
         displayProduct(response.result);
         getComponentsOfProduct();
     });
@@ -34,8 +36,8 @@ function displayProduct(data){
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
 
-    var po = JSON.parse( getStorage('product_order') );  
-    po = {
+    var eos = JSON.parse( getStorage('edit-order-slip') );  
+    eos.data = {
         product_id : parseInt(data.product_id),
         name : data.short_code,
         price : data.price,
@@ -50,70 +52,52 @@ function displayProduct(data){
         others:[]
     };  
 
-    setStorage('product_order', JSON.stringify(po));
-
+    setStorage('edit-order-slip', JSON.stringify(eos)); 
     logicDisplay();
 }
 
-$('#instruction').on('change', function(){
-
-    var _this = $(this);
-
-    var po = JSON.parse( getStorage('product_order') );   
-    po.instruction = _this.val(); 
-
-    setStorage('product_order', JSON.stringify(po)); 
+$('#instruction').on('change', function(){ 
+    var _this = $(this); 
+    var eos = JSON.parse( getStorage('edit-order-slip') );   
+    eos.data.instruction = _this.val();  
+    setStorage('edit-order-slip', JSON.stringify(eos)); 
 });
 
 $('#is_takeout').change('change', function(){ 
     var _this = $(this); 
-    var po = JSON.parse( getStorage('product_order') );
-    po.is_take_out = _this.is(':checked');
-    setStorage('product_order', JSON.stringify(po)); 
+    var eos = JSON.parse( getStorage('edit-order-slip') );
+    eos.data.is_take_out = _this.is(':checked');
+    setStorage('edit-order-slip', JSON.stringify(eos)); 
 });
 
 $('#btn-m-minus').on('click', function(){ 
-    var po = JSON.parse( getStorage('product_order') );   
-    var poSet = new Set(); 
-    if(po.qty > 1){ 
-        po.qty--; 
-        $.each(po.others, function(k,v){
+    var eos = JSON.parse( getStorage('edit-order-slip') );    
+    if(eos.data.qty > 1){ 
+        eos.data.qty--; 
+        $.each(eos.data.others, function(k,v){
             v.qty = v.main_product_component_qty * po.qty;
         }); 
     }  
-    setStorage('product_order', JSON.stringify(po));
+    setStorage('edit-order-slip', JSON.stringify(eos));
     logicDisplay();
 });
 
 $('#btn-m-plus').on('click', function(){ 
-    var po = JSON.parse( getStorage('product_order') );  
-    po.qty++;
-    po.total = po.qty * po.price;  
-    $.each(po.others, function(k,v){
+    var eos = JSON.parse( getStorage('edit-order-slip') );  
+    eos.data.qty++;
+    eos.data.total = eos.data.qty * eos.data.price;
+    $.each(eos.data.others, function(k,v){
         v.qty += v.main_product_component_qty * 1;
-    });   
-    setStorage('product_order', JSON.stringify(po));
+    });
+    setStorage('edit-order-slip', JSON.stringify(eos));
     logicDisplay();
 }); 
 
-$('.btn.btn-flat.btn-info.add-to-order').on('click', function(){ 
-    //$(this).attr('disabled','disabled');
-
-    // initialize product order 
-    var po = JSON.parse( getStorage('product_order') );
- 
-    postWithHeader(routes.orderSlip, po , function(response){
-        console.log(response);
-        showSuccess('','Added Successfully!', function(){ 
-        }); 
-    }); 
-
-});
-
 function getComponentsOfProduct(){
     let outlet = JSON.parse(getStorage('outlet'));  
+    var eos = JSON.parse( getStorage('edit-order-slip') ); 
     let data = {
-        product_id  : getStorage('selected-product'),
+        product_id  : eos.data.main_product_id,
         outlet_id   : outlet.id
     }; 
     postWithHeader(routes.productComponents, data, function(response){
@@ -130,16 +114,16 @@ function componentsDisplayer(data){
     var cc = $('.components-container');
     cc.empty();
 
-    var po = JSON.parse( getStorage('product_order') );  
+    var eos = JSON.parse( getStorage('edit-order-slip') );  
 
     $.each(data, function(k,v){ 
         v.quantity = parseInt(v.quantity, 10);  
-        po.others.push({
+        eos.data.others.push({
             product_id : parseInt(v.product_id),
             name : v.description,
             price : 0,
             qty : v.quantity,
-            main_product_id : parseInt(po.product_id),
+            main_product_id : parseInt(eos.data.product_id),
             main_product_component_id : parseInt(v.product_id),
             main_product_component_qty : v.quantity,
             total : (v.quantity * 0), 
@@ -147,7 +131,7 @@ function componentsDisplayer(data){
             others: []
         });
 
-        var _id = po.product_id+'-'+v.product_id;
+        var _id = eos.data.product_id+'-'+v.product_id;
         cc.append(
             '<div class="mrg-top-0">'+
                 '<div id="accordion-cc-'+k+'" class="accordion border-less" role="tablist" aria-multiselectable="true">'+
@@ -170,8 +154,8 @@ function componentsDisplayer(data){
         );
 
         getComponentCategories(v.product_id, _id+'-categories');
-    });  
-    setStorage('product_order', JSON.stringify(po)); 
+    });
+    setStorage('edit-order-slip', JSON.stringify(eos)); 
 } 
 
 function getComponentCategories(product_id,container){
@@ -192,6 +176,7 @@ function getComponentCategories(product_id,container){
 }
 
 function componentCategoriesDisplayer(product,data,container){
+    var eos = JSON.parse( getStorage('edit-order-slip') ); 
     var c = $('#'+container);
     c.empty();
     $.each(data, function(k,v){ 
@@ -215,7 +200,7 @@ function componentCategoriesDisplayer(product,data,container){
                         '<button '+
                         'id="'+_id+'-minus" '+ 
                         'data-main_product_component_id="'+product.product_id+'" '+ 
-                        'data-main_product_id="'+getStorage('selected-product')+'" '+
+                        'data-main_product_id="'+eos.main_product_id+'" '+
                         'data-name="'+v.short_code+'" '+
                         'data-price="'+v.price+'" '+
                         'data-product_id="'+v.product_id+'" '+
@@ -225,7 +210,7 @@ function componentCategoriesDisplayer(product,data,container){
                         '<button '+ 
                         'id="'+_id+'-plus" '+
                         'data-main_product_component_id="'+product.product_id+'" '+ 
-                        'data-main_product_id="'+getStorage('selected-product')+'" '+
+                        'data-main_product_id="'+eos.main_product_id+'" '+
                         'data-name="'+v.short_code+'" '+
                         'data-price="'+v.price+'" '+
                         'data-product_id="'+v.product_id+'" '+
@@ -252,8 +237,8 @@ function btnComponentCategoryMinus(id){
         }; 
 
         // initialize product order 
-        var po = JSON.parse( getStorage('product_order') );  
-        $.each(po.others, function(k,v){ 
+        var eos = JSON.parse( getStorage('edit-order-slip') );  
+        $.each(eos.data.others, function(k,v){ 
             if(data.main_product_component_id == v.main_product_component_id){ 
                 var _index_to_remove = -1;
                 $.each(v.others, function(kk,vv){ 
@@ -263,12 +248,12 @@ function btnComponentCategoryMinus(id){
                             vv.qty--;
                             vv.total = vv.price * vv.qty;  
                             if(vv.qty == 0){ 
-                                var _id = '#'+po.product_id+'-'+v.product_id+'-categories-'+vv.product_id+'-qty';
+                                var _id = '#'+eos.data.product_id+'-'+v.product_id+'-categories-'+vv.product_id+'-qty';
                                 $(_id).text(0);  
                                 
                                 _index_to_remove = kk;
                             }
-                        } 
+                        }
                     }
                 });
 
@@ -276,10 +261,10 @@ function btnComponentCategoryMinus(id){
                 if (_index_to_remove > -1) {
                     v.others.splice(_index_to_remove, 1);
                 }
-            } 
+            }
         });
         //
-        setStorage('product_order', JSON.stringify(po)); 
+        setStorage('edit-order-slip', JSON.stringify(eos)); 
         logicDisplay();
     });
 }
@@ -296,10 +281,10 @@ function btnComponentCategoryPlus(id){
         }; 
 
         // initialize product order 
-        var po = JSON.parse( getStorage('product_order') );  
+        var eos = JSON.parse( getStorage('edit-order-slip') );  
 
         // check if the selected sub component category is exist in sub component
-        $.each(po.others, function(k,v){ 
+        $.each(eos.data.others, function(k,v){ 
             if(data.main_product_component_id == v.main_product_component_id){ 
 
                 if(v.qty > 0){
@@ -320,7 +305,7 @@ function btnComponentCategoryPlus(id){
                             name : data.name,
                             price : data.price,
                             qty : 1,
-                            main_product_id : parseInt(po.product_id),
+                            main_product_id : parseInt(eos.data.product_id),
                             main_product_component_qty : v.quantity,
                             main_product_component_id : parseInt(v.product_id),
                             
@@ -337,7 +322,7 @@ function btnComponentCategoryPlus(id){
         });
 
         //
-        setStorage('product_order', JSON.stringify(po)); 
+        setStorage('edit-order-slip', JSON.stringify(eos)); 
 
         logicDisplay();
     });
@@ -346,30 +331,30 @@ function btnComponentCategoryPlus(id){
 function logicDisplay(){ 
     var grand_total = 0; 
 
-    var po = JSON.parse( getStorage('product_order') );  
+    var eos = JSON.parse( getStorage('edit-order-slip') );  
      
         
         /**
          * MAIN PRODUCT SECTION
          */ 
-        grand_total += po.total; 
-        $('#m-product-qty').val(po.qty);   
+        grand_total += eos.data.total; 
+        $('#m-product-qty').val(eos.data.qty);   
 
 
         /**
          * COMPONENTS SECTION
          */
-        $.each(po.others, function(k,v){
-            $('#'+po.product_id+'-'+v.product_id).text(v.qty);
+        $.each(eos.data.others, function(k,v){
+            $('#'+eos.data.product_id+'-'+v.product_id).text(v.qty);
         }); 
 
 
         /**
          * SUB COMPONENTS SECTION
          */
-        $.each(po.others, function(k,v){
+        $.each(eos.data.others, function(k,v){
             $.each(v.others, function(kk,vv){ 
-                var _id = '#'+po.product_id+'-'+v.product_id+'-categories-'+vv.product_id+'-qty';
+                var _id = '#'+eos.data.product_id+'-'+v.product_id+'-categories-'+vv.product_id+'-qty';
                 $(_id).text(vv.qty); 
                 grand_total += vv.total;
             });

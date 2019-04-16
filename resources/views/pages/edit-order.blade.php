@@ -1,21 +1,25 @@
 @extends('layouts.master')
-@section('title', "") 
+@section('title', 'Completed Order')  
+
+@section('css')
+<link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
+@endsection 
 
 @section('js')
-    <script src="/js/pages/product.js"></script>
+
+<script src="/js/pages/edit-order.js"></script>
 @endsection
 
 @section('content')
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Category</a></li>
-        <li class="breadcrumb-item"><a href="/sub-category">Sub-Category</a></li>
-        <li class="breadcrumb-item"><a href="/sub-category/products">Products</a></li> 
+    <ol class="breadcrumb">  
+        <li class="breadcrumb-item"><a href="/my-order">My Order</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
     </ol>
 </nav>
-<br> 
+<br>
 <div class="container">
-    <div class="row" id="container">
+    <div class="row" id="container"> 
         <div class="col-md-12">
                 <div class="widget-profile-1 card">
                     <div class="profile border bottom">
@@ -111,12 +115,12 @@
                                 TOTAL : 0.00
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-flat btn-info add-to-order">Add to Order</button>
+                                <button class="btn  btn-info add-to-order">Save Changes</button>
                             </li>
                         </ul>
                     </div>
                 </div>
-        </div> 
+        </div>
     </div>
-</div>
+</div> 
 @endsection

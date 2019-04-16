@@ -28,6 +28,7 @@ function osDisplayer(header, details){
     if(header == null && details == null){
         ifHasNoPendingOrder.show();
         ifHasPendingOrder.hide();
+        return;
     }else{
         ifHasNoPendingOrder.hide();
         ifHasPendingOrder.show();
@@ -95,10 +96,10 @@ function osDisplayer(header, details){
                 '<td width="30%" class="text-right">'+
                     '<div class="relative mrg-top-10">  '+
                         '<span class="pdd-right-20"> ('+ numberWithCommas(total) +') </span> '+
-                        '<button data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'" class="btn btn-info btn-sm">'+
+                        '<button class="btn btn-info btn-sm btn-product-edit" data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'">'+
                                 '<i class="ti-pencil"></i>'+
                         '</button>'+
-                        '<button class="btn btn-danger btn-sm btn-product-remove" id="'+main_product_id+'-'+sequence+'" data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'">'+
+                        '<button class="btn btn-danger btn-sm btn-product-remove" data-header-id="'+header_id+'" data-main-product-id="'+main_product_id+'" data-sequence="'+sequence+'">'+
                                 '<i class="ti-trash"></i>'+
                         '</button>'+
                     '</div> '+
@@ -110,6 +111,7 @@ function osDisplayer(header, details){
 
     os_container.append(os_txt);
     btnProductRemove();
+    btnProductEdit();
 
     //total  
     $('#sub-total').text( numberWithCommas(sub_total) + '' ); 
@@ -125,6 +127,26 @@ function osDisplayer(header, details){
     }else{
         showCustomerCard(header.customer_name);
     }
+}
+
+function btnProductEdit(){
+    $('.btn.btn-info.btn-sm.btn-product-edit').on('click', function(){
+        console.log('click'); 
+        var header_id  = $(this).data('header-id');
+        var main_product_id = $(this).data('main-product-id');
+        var sequence = $(this).data('sequence'); 
+        console.log(header_id);
+        console.log(main_product_id);
+        console.log(sequence);
+        var data = {
+            header_id : header_id,
+            main_product_id : main_product_id,
+            sequence : sequence,
+            data : null
+        };
+        setStorage('edit-order-slip', JSON.stringify(data));
+        redirectTo(routes.orderSlipDetail.get);
+    });
 }
 
 function btnProductRemove(){
@@ -285,4 +307,54 @@ $('.btn-print-order-slip').on('click', function(){
     customPost(local_printer_api+'/print/order-slip',data, function(response){
         cl([response]);
     });
+});
+
+$('.btn-finish-transaction').on('click', function(){  
+    $.confirm({
+        title: 'Confirmation!',
+        content: 'You are about to finish this transaction, do you want to continue?',
+        type: 'dark',
+        boxWidth: '80%',
+        useBootstrap: false,
+        closeIcon: function(){
+                //return false; // to prevent close the modal.
+                // or
+                //return 'aRandomButton'; // set a button handler, 'aRandomButton' prevents close.
+                 
+            },
+        buttons: { 
+            cancel: function () { 
+                // enableButton();
+            },
+            
+            somethingElse: {
+                text: 'Confirm',
+                btnClass: 'btn-green',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    
+                    var os = JSON.parse( getStorage('order-slip') ); 
+                    var data = {
+                        _method : 'PATCH',
+                        orderslip_id : os.header.orderslip_header_id
+                    };
+                    postWithHeader(routes.orderSlipMarkAsDone, data, function(response){
+                        console.log(response);
+                        if(response.success == false){
+                            showWarning('', response.message, function(){
+
+                            });
+                            return;
+                        } 
+                        showSuccess('','Success', function(){
+                            redirectTo('');
+                        });
+                        
+                    });
+                    
+                }
+            }
+        }
+    });
+
 });

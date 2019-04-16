@@ -14,7 +14,7 @@
 <br>
 <div class="container">
     <div class="row" id="container">
-        <div class="col-md-12">
+        {{-- <div class="col-md-12">
             <a href="#ask-1" class="card mrg-btm-15 scroll-to">
                 <ul class="list-unstyled">
                     <li>
@@ -58,7 +58,7 @@
                     </div> 
                 </div>
             </a>
-        </div>
+        </div> --}}
     </div>
 </div> 
 @endsection

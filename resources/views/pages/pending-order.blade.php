@@ -1,7 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Pending Order')  
 
+@section('css')
+<link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
+@endsection 
+
 @section('js')
+    <script src="/js/plugins/jquery-confirm.min.js"></script>
     <script src="js/pages/pending-order.js"></script>
 @endsection
 
@@ -10,11 +15,11 @@
     <ol class="breadcrumb"> 
         <li class="breadcrumb-item active" aria-current="page">Pending Order's</li>
     </ol>
-</nav>
+</nav> 
 <br>
 <div class="container">
     <div class="row" id="container">
-        <div class="col-md-12">
+        {{-- <div class="col-md-12">
             <a href="#ask-1" class="card mrg-btm-15 scroll-to bg-success">
                     <ul class="list-unstyled">
                             <li>
@@ -65,10 +70,8 @@
             <a href="#ask-1" class="card mrg-btm-15 scroll-to bg-info">
                     <ul class="list-unstyled">
                             <li>
-                                <div class="pdd-vertical-5 pdd-horizon-10">
-                                    
-                                    <div class="info">
-                                        
+                                <div class="pdd-vertical-5 pdd-horizon-10"> 
+                                    <div class="info"> 
                                         <span class="sub-title">
                                                 <i class="ti-timer pdd-right-5"></i>
                                                 <span>2 min ago</span>
@@ -107,7 +110,7 @@
                     </div> 
                 </div>
             </a>
-        </div> 
+        </div>  --}}
     </div>
 </div> 
 @endsection

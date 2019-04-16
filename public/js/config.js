@@ -31,11 +31,17 @@ var routes = {
     orderSlipActive:            '/orderslip/active',
     customerSearch:             '/customer/search',
     orderSlipHeader: {
-        patch:                  '/orderslip/header'
+        patch:                  '/orderslip/header',
+        pendingByOutlet:        '/orderslip/pending',
+        completedByOutlet:      '/orderslip/completed'
     },
     orderSlipDetail: { 
-        delete:                 '/orderslip/details'
-    }
+        delete:                 '/orderslip/details',
+        get:                    '/my-order/edit',
+        post:                   '/my-order/edit'
+    },
+    orderSlipMarkAsDone:        '/orderslip/mark-as-done',
+    orderSlipChangeOs:          '/orderslip/change-os'
 };
 let main_cart;
 var main_cart_other;
@@ -297,7 +303,7 @@ function validateContactNumber(value) {
 
 function cl(arr = arr() ){
     arr.forEach(element => {
-        //console.log(element);
+        console.log(element);
     });
 }
 

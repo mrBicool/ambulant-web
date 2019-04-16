@@ -1,7 +1,12 @@
 @extends('layouts.master')
 @section('title', 'My Order')  
 
+@section('css')
+<link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
+@endsection 
+
 @section('js') 
+    <script src="/js/plugins/jquery-confirm.min.js"></script>
     <script src="js/pages/my-order.js"></script>
 @endsection
 
@@ -25,7 +30,7 @@
                     <button class="btn-print-order-slip btn btn-success btn-sm pull-right no-mrg">
                             <i class="ti-printer"></i>
                     </button> 
-                    <button  class="btn btn-primary btn-sm pull-right ">
+                    <button  class="btn-finish-transaction btn btn-primary btn-sm pull-right ">
                             Finish Transaction
                     </button>
                     {{-- <a href="#" class="btn btn-primary pull-right no-mrg">Finish Transaction</a> --}}
