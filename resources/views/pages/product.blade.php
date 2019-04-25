@@ -111,7 +111,7 @@
                                 TOTAL : 0.00
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-flat btn-info add-to-order">Add to Order</button>
+                                <button class="btn btn-flat btn-info add-to-order">Submit to order</button>
                             </li>
                         </ul>
                     </div>

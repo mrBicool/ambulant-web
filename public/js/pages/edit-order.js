@@ -6,7 +6,7 @@ $(document).ready(function(){
         return;
     } 
 
-    getProduct();
+    getProduct(); 
 });
 
 function getProduct(){ 

@@ -17,7 +17,7 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://172.16.12.130:8005/api';
+var api = 'http://ambulant-api.test:8080/api';
 var local_printer_api = "http://instafood-printer.beta/api";
 var routes = {
     login:                      '/login',

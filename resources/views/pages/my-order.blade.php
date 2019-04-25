@@ -28,7 +28,7 @@
                 <div class="card-heading">
                     <h4 class="card-title inline-block pdd-top-5">OS #: <i id="order-slip-id">null</i></h4>
                     <button class="btn-print-order-slip btn btn-success btn-sm pull-right no-mrg">
-                            <i class="ti-printer"></i>
+                            <i class="ti-printer"></i> Print
                     </button> 
                     <button  class="btn-finish-transaction btn btn-primary btn-sm pull-right ">
                             Finish Transaction
