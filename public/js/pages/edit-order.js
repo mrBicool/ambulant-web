@@ -4,9 +4,12 @@ $(document).ready(function(){
     if(!isLogin()){
         redirectTo('/login');
         return;
-    } 
+    }
 
     getProduct(); 
+
+    // get the order details to update/patch to product
+    getOrders();
 });
 
 function getProduct(){ 
@@ -172,6 +175,8 @@ function getComponentCategories(product_id,container){
         }
          
         componentCategoriesDisplayer(response.result.product,response.result.categories.data,container);
+
+        
     });
 }
 
@@ -361,4 +366,23 @@ function logicDisplay(){
         });
 
     $('#grand-total').text('TOTAL : ' + numberWithCommas(grand_total));
+}
+
+function getOrders(){
+    let eos = JSON.parse(getStorage('edit-order-slip'));
+    let data = {
+        header_id       : eos.header_id,
+        main_product_id : eos.main_product_id,
+        sequence        : eos.sequence
+    };
+
+    getWithHeader(routes.orderSlipDetail.getSingleOrder, data, function(response){
+        if(response.success == false){ 
+            showError('',response.message, function(){
+            });
+            return;
+        }
+        
+        console.log(response);
+    });
 }

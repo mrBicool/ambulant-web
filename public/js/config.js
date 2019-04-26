@@ -38,6 +38,7 @@ var routes = {
     orderSlipDetail: { 
         delete:                 '/orderslip/details',
         get:                    '/my-order/edit',
+        getSingleOrder:         '/orderslip/detail',
         post:                   '/my-order/edit'
     },
     orderSlipMarkAsDone:        '/orderslip/mark-as-done',
