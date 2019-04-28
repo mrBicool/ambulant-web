@@ -7,7 +7,7 @@ $(document).ready(function(){
     }
 
     // getProduct();  
-    // get the order details to update/patch to product
+    // get the order detail to update/patch the product
     getOrders();
 });
 
@@ -26,8 +26,7 @@ function getProduct(order){
             });
             return;
         }
-        
-        //console.log(response);
+         
         displayProduct(response.result,order);
         getComponentsOfProduct(order);
     });
