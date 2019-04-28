@@ -17,7 +17,7 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://ambulant-api.test:8080/api';
+var api = 'http://localhost:8000/api';
 var local_printer_api = "http://instafood-printer.beta/api";
 var routes = {
     login:                      '/login',
@@ -304,7 +304,7 @@ function validateContactNumber(value) {
 
 function cl(arr = arr() ){
     arr.forEach(element => {
-        console.log(element);
+        //console.log(element);
     });
 }
 

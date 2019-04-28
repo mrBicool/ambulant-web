@@ -6,13 +6,12 @@ $(document).ready(function(){
         return;
     }
 
-    getProduct(); 
-
+    // getProduct();  
     // get the order details to update/patch to product
     getOrders();
 });
 
-function getProduct(){ 
+function getProduct(order){ 
     //parse 
     let outlet = JSON.parse(getStorage('outlet'));  
     let eos = JSON.parse(getStorage('edit-order-slip'));
@@ -28,13 +27,23 @@ function getProduct(){
             return;
         }
         
-        console.log(response);
-        displayProduct(response.result);
-        getComponentsOfProduct();
+        //console.log(response);
+        displayProduct(response.result,order);
+        getComponentsOfProduct(order);
     });
 }
 
-function displayProduct(data){
+function displayProduct(data, order){
+
+    // --
+    var current_qty = 1;
+    $.each(order, function(k,v){
+        if(v.product_id == v.main_product_id){
+            //console.log(k,v);
+            current_qty = v.qty;
+        }
+    });
+    // --
     
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
@@ -44,11 +53,11 @@ function displayProduct(data){
         product_id : parseInt(data.product_id),
         name : data.short_code,
         price : data.price,
-        qty : 1,
+        qty : current_qty,
         main_product_id : parseInt(data.product_id),
         main_product_component_id : null,
         main_product_component_qty : null,
-        total : (1 * data.price),
+        total : (current_qty * data.price),
         instruction : "",
         is_take_out : false,
         part_number : data.part_number,
@@ -96,7 +105,7 @@ $('#btn-m-plus').on('click', function(){
     logicDisplay();
 }); 
 
-function getComponentsOfProduct(){
+function getComponentsOfProduct(order){
     let outlet = JSON.parse(getStorage('outlet'));  
     var eos = JSON.parse( getStorage('edit-order-slip') ); 
     let data = {
@@ -109,11 +118,11 @@ function getComponentsOfProduct(){
             });
             return;
         }  
-        componentsDisplayer(response.result.data); 
+        componentsDisplayer(response.result.data, order); 
     });
 }
 
-function componentsDisplayer(data){
+function componentsDisplayer(data, order){
     var cc = $('.components-container');
     cc.empty();
 
@@ -121,6 +130,19 @@ function componentsDisplayer(data){
 
     $.each(data, function(k,v){ 
         v.quantity = parseInt(v.quantity, 10);  
+
+        //  
+        $.each(order, function(kk,vv){
+            if(
+                v.product_id == vv.main_product_comp_id &&
+                vv.product_id == vv.main_product_comp_id 
+                ){ 
+                v.quantity = v.quantity * vv.qty;
+            }
+        });
+        // 
+
+
         eos.data.others.push({
             product_id : parseInt(v.product_id),
             name : v.description,
@@ -155,13 +177,14 @@ function componentsDisplayer(data){
                 '</div>'+
             '</div>'
         );
-
-        getComponentCategories(v.product_id, _id+'-categories');
+        
+        logicDisplay();
+        getComponentCategories(v.product_id, _id+'-categories', order);
     });
     setStorage('edit-order-slip', JSON.stringify(eos)); 
 } 
 
-function getComponentCategories(product_id,container){
+function getComponentCategories(product_id, container, order){
     let outlet = JSON.parse(getStorage('outlet'));  
     let data = {
         product_id  : product_id,
@@ -174,23 +197,66 @@ function getComponentCategories(product_id,container){
             return;
         }
          
-        componentCategoriesDisplayer(response.result.product,response.result.categories.data,container);
+        componentCategoriesDisplayer(
+            response.result.product,
+            response.result.categories.data,
+            container, 
+            order);
 
         
     });
 }
 
-function componentCategoriesDisplayer(product,data,container){
+function componentCategoriesDisplayer(product,data,container, order){
     var eos = JSON.parse( getStorage('edit-order-slip') ); 
     var c = $('#'+container);
     c.empty();
-    $.each(data, function(k,v){ 
+    $.each(data, function(k,v){   
 
+        v.qty = 0;
         if(v.price <= product.price){
             v.price = 0;
         }else{
-            v.price = v.price - product.price;
+            v.price = (v.price - product.price);
         }
+
+        // initialize product order 
+        var eos = JSON.parse( getStorage('edit-order-slip') ); 
+        
+        $.each(order, function(kk,vv){
+            if(
+                product.product_id == vv.main_product_comp_id &&
+                v.product_id == vv.product_id
+                ){ 
+                //v.quantity = v.quantity * vv.qty;
+                //console.log(product, data, v, vv); 
+
+                $.each(eos.data.others, function(kkk,vvv){ 
+            
+                    if(product.product_id == vvv.main_product_component_id){ 
+                        //console.log(vvv);
+                        v.qty = vv.qty;
+                        //console.log(vv);
+                        vvv.others.push({
+                            product_id : parseInt(vv.product_id),
+                            name : vv.name,
+                            price : vv.srp,
+                            qty : vv.qty,
+                            main_product_id : parseInt(eos.data.product_id),
+                            main_product_component_qty : vv.main_product_comp_qty,
+                            main_product_component_id : parseInt(vv.main_product_comp_id),
+                            
+                            total : (vv.srp * vv.qty),
+                            part_number : vv.part_number,
+                        }); 
+                    }
+                });
+            }
+        });
+        //  
+        setStorage('edit-order-slip', JSON.stringify(eos)); 
+
+        
 
         var _id = container+'-'+v.product_id;
         c.append(
@@ -201,7 +267,7 @@ function componentCategoriesDisplayer(product,data,container){
                 '</div>'+
                 '<div class="col-md-4 text-right">'+
                     '<p class="mrg-top-10">'+
-                        '<span>(<i class="text-success" id="'+_id+'-qty">0</i> )</span>'+
+                        '<span>(<i class="text-success" id="'+_id+'-qty">'+v.qty+'</i> )</span>'+
                         '<button '+
                         'id="'+_id+'-minus" '+ 
                         'data-main_product_component_id="'+product.product_id+'" '+ 
@@ -228,6 +294,8 @@ function componentCategoriesDisplayer(product,data,container){
         );
         btnComponentCategoryMinus(_id+'-minus');
         btnComponentCategoryPlus(_id+'-plus');
+
+        logicDisplay();
     });
 }
 
@@ -383,6 +451,9 @@ function getOrders(){
             return;
         }
         
-        console.log(response);
+        //console.log(response.result.data);
+
+        // 
+        getProduct(response.result.data);
     });
 }
