@@ -28,6 +28,7 @@ var routes = {
     productComponents:          '/product/components',
     productComponentCategories: '/product/component/categories',
     orderSlip:                  '/orderslip',
+    orderSlipUpdate:            '/orderslip',
     orderSlipActive:            '/orderslip/active',
     customerSearch:             '/customer/search',
     orderSlipHeader: {

@@ -130,13 +130,14 @@ function componentsDisplayer(data, order){
     $.each(data, function(k,v){ 
         v.quantity = parseInt(v.quantity, 10);  
 
-        //  
+        //
+        var n_qty = 0;
         $.each(order, function(kk,vv){
             if(
                 v.product_id == vv.main_product_comp_id &&
                 vv.product_id == vv.main_product_comp_id 
                 ){ 
-                v.quantity = v.quantity * vv.qty;
+                n_qty = v.quantity * vv.qty;
             }
         });
         // 
@@ -146,11 +147,11 @@ function componentsDisplayer(data, order){
             product_id : parseInt(v.product_id),
             name : v.description,
             price : 0,
-            qty : v.quantity,
+            qty : n_qty,
             main_product_id : parseInt(eos.data.product_id),
             main_product_component_id : parseInt(v.product_id),
             main_product_component_qty : v.quantity,
-            total : (v.quantity * 0), 
+            total : (n_qty * 0),
             part_number : v.product_partno,
             others: []
         });
@@ -460,7 +461,24 @@ function getOrders(){
 $('.btn-info.add-to-order').on('click', function(){
 
     $(this).attr('disabled','disabled');
-    
+
     let eos = JSON.parse(getStorage('edit-order-slip'));
-    console.log(eos);
+
+    var data = {
+        _method: 'PATCH', 
+        data: JSON.stringify(eos)
+    };
+
+    postWithHeader(routes.orderSlipUpdate, data, function(response){ 
+        if(response.success == false){
+            showWarning('', response.message, function(){
+
+            });
+            return;
+        } 
+        showSuccess('','Success', function(){
+            redirectTo('/my-order');
+        });
+        
+    }); 
 });
