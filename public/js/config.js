@@ -17,7 +17,7 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://localhost:8000/api';
+var api = 'http://localhost:8005/api';
 var local_printer_api = "http://instafood-printer.beta/api";
 var routes = {
     login:                      '/login',

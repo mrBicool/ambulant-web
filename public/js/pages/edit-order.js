@@ -456,3 +456,11 @@ function getOrders(){
         getProduct(response.result.data);
     });
 }
+
+$('.btn-info.add-to-order').on('click', function(){
+
+    $(this).attr('disabled','disabled');
+    
+    let eos = JSON.parse(getStorage('edit-order-slip'));
+    console.log(eos);
+});
