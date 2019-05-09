@@ -123,7 +123,7 @@ $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){
                     // initialize product order 
                     var po = JSON.parse( getStorage('product_order') ); 
                     postWithHeader(routes.orderSlip, po , function(response){ 
-                        redirectTo('/my-order');
+                        redirectTo('/');
                     }); 
                     
                 }

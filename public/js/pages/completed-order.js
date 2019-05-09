@@ -20,7 +20,7 @@ function getCompleted(){
     });
 }
 
-function completedDisplayer(items){KB
+function completedDisplayer(items){
     var cc = $('#container'); 
     $.each(items, function(k,v){  
         var net_amount = v.net_amount;

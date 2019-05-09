@@ -84,7 +84,7 @@ function osDisplayer(header, details){
             // instruction
             $.each(v, function(kk,vv){ 
                 if(vv.product_id == vv.main_product_id){
-                     if(vv.remarks != null){
+                     if(vv.remarks != null && vv.remarks != ''){
                          os_txt += '<span class="sub-title">+ '+vv.remarks+'</span>';
                      }
                 }
@@ -167,7 +167,7 @@ function btnProductRemove(){
 
         $.confirm({
             title: 'Confirmation!',
-            content: 'You are about to submit this item as order, do you want to continue?',
+            content: 'You are about to remove this item, do you want to continue?',
             type: 'dark',
             boxWidth: '80%',
             useBootstrap: false,
@@ -359,6 +359,14 @@ $('.btn-finish-transaction').on('click', function(){
                 action: function(){
                     
                     var os = JSON.parse( getStorage('order-slip') ); 
+
+                    var details = os.details; 
+                    if(details.length <= 0){
+                        showWarning('', 'Must have atleast 1 item to continue.', function(){
+                        });
+                        return;
+                    }
+
                     var data = {
                         _method : 'PATCH',
                         orderslip_id : os.header.orderslip_header_id
@@ -367,7 +375,6 @@ $('.btn-finish-transaction').on('click', function(){
                         console.log(response);
                         if(response.success == false){
                             showWarning('', response.message, function(){
-
                             });
                             return;
                         } 
