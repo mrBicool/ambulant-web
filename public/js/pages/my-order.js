@@ -6,7 +6,7 @@ $(document).ready(function(){
     } 
 
     getOrders();
-});
+});  
 
 function getOrders(){
     getWithHeader(routes.orderSlipActive,{}, function(response){
@@ -151,40 +151,65 @@ function btnProductEdit(){
 
 function btnProductRemove(){
     $('.btn.btn-danger.btn-sm.btn-product-remove').on('click', function(){  
-        var header_id  = $(this).data('header-id');
-        var main_product_id = $(this).data('main-product-id');
-        var sequence = $(this).data('sequence'); 
-        console.log(header_id);
-        console.log(main_product_id);
-        console.log(sequence);
+
+        var header_id           = $(this).data('header-id');
+        var main_product_id     = $(this).data('main-product-id');
+        var sequence            = $(this).data('sequence');
 
         var os = JSON.parse( getStorage('order-slip') );
         var data = {
-            _method : 'DELETE',
-            branch_id : os.header.branch_id,
-            header_id : header_id,
+            _method         : 'DELETE',
+            branch_id       : os.header.branch_id,
+            header_id       : header_id,
             main_product_id : main_product_id,
-            sequence : sequence
+            sequence        : sequence
         };
-        postWithHeader(routes.orderSlipDetail.delete, data, function(response){ 
-            if(response.success == false){
-                showWarning('', response.message, function(){
-    
-                });
-                return;
+
+        $.confirm({
+            title: 'Confirmation!',
+            content: 'You are about to submit this item as order, do you want to continue?',
+            type: 'dark',
+            boxWidth: '80%',
+            useBootstrap: false,
+            closeIcon: function(){
+                    //return false; // to prevent close the modal.
+                    // or
+                    //return 'aRandomButton'; // set a button handler, 'aRandomButton' prevents close. 
+                },
+            buttons: { 
+                cancel: function () { 
+                    // enableButton();
+                },
+                
+                somethingElse: {
+                    text: 'Confirm',
+                    btnClass: 'btn-green',
+                    keys: ['enter', 'shift'],
+                    action: function(){ 
+                        
+                        //======
+                            postWithHeader(routes.orderSlipDetail.delete, data, function(response){ 
+                                if(response.success == false){
+                                    showWarning('', response.message, function(){
+                        
+                                    });
+                                    return;
+                                }
+                        
+                                showSuccess('', response.message, function(){ 
+                                });
+                                getOrders();
+                            });
+                        //======
+                        
+                    }
+                }
             }
-    
-            showSuccess('', response.message, function(){
-                 
-            });
-            getOrders();
-        });
+        }); 
 
     }); 
 }
- 
-
-
+  
 $('#btn-head-count-minus').on('click', function(){
     var hc = parseInt($('#head-count').val());
 

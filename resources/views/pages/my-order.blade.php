@@ -4,7 +4,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
 @endsection 
-
+ 
 @section('js') 
     <script src="/js/plugins/jquery-confirm.min.js"></script>
     <script src="js/pages/my-order.js"></script>
@@ -21,7 +21,7 @@
     <div class="row" id="container">
         <div class="col-md-12 text-center if-has-no-pending-order" style="display:none;">
             <span class="font-size-30">:(</span>
-            <div>No record was found</div>
+            <div>Empty</div>
         </div>
         <div class="col-md-12 if-has-pending-order" style="display:none;">
             <div class="card">

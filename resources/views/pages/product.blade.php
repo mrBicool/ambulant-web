@@ -1,10 +1,15 @@
 @extends('layouts.master')
 @section('title', "") 
 
-@section('js')
-    <script src="/js/pages/product.js"></script>
+@section('css')
+<link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
 @endsection
 
+@section('js')
+<script src="/js/plugins/jquery-confirm.min.js"></script> 
+<script src="/js/pages/product.js"></script> 
+@endsection
+ 
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -111,7 +116,7 @@
                                 TOTAL : 0.00
                             </li>
                             <li class="list-inline-item">
-                                <button class="btn btn-flat btn-info add-to-order">Submit to order</button>
+                                <button class="btn btn-flat btn-info add-to-order">Submit</button>
                             </li>
                         </ul>
                     </div>

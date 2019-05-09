@@ -36,10 +36,22 @@ function displayProduct(data, order){
 
     // --
     var current_qty = 1;
+    var is_take_out = false;
+    var instruction = '';
     $.each(order, function(k,v){
         if(v.product_id == v.main_product_id){
             //console.log(k,v);
             current_qty = v.qty;
+
+            // order type
+            if(v.order_type == 1){
+                is_take_out = false;
+            }else if(v.order_type == 2){
+                is_take_out = true;
+                $('#is_takeout').attr('checked','checked');
+            } 
+            
+            instruction = v.remarks;
         }
     });
     // --
@@ -57,8 +69,8 @@ function displayProduct(data, order){
         main_product_component_id : null,
         main_product_component_qty : null,
         total : (current_qty * data.price),
-        instruction : "",
-        is_take_out : false,
+        instruction : instruction,
+        is_take_out : is_take_out,
         part_number : data.part_number,
         others:[]
     };  
@@ -411,7 +423,8 @@ function logicDisplay(){
          * MAIN PRODUCT SECTION
          */ 
         grand_total += eos.data.total; 
-        $('#m-product-qty').val(eos.data.qty);   
+        $('#m-product-qty').val(eos.data.qty);
+        $('#instruction').val(eos.data.instruction);
 
 
         /**

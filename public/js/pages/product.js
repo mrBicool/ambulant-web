@@ -5,7 +5,7 @@ $(document).ready(function(){
         redirectTo('/login');
         return;
     } 
-
+ 
     getProduct();
 });
 
@@ -97,17 +97,40 @@ $('#btn-m-plus').on('click', function(){
 }); 
 
 $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){ 
-    //$(this).attr('disabled','disabled');
-
-    // initialize product order 
-    var po = JSON.parse( getStorage('product_order') );
+    //$(this).attr('disabled','disabled'); 
+    $.confirm({
+        title: 'Confirmation!',
+        content: 'You are about to submit this item as order, do you want to continue?',
+        type: 'dark',
+        boxWidth: '80%',
+        useBootstrap: false,
+        closeIcon: function(){
+                //return false; // to prevent close the modal.
+                // or
+                //return 'aRandomButton'; // set a button handler, 'aRandomButton' prevents close. 
+            },
+        buttons: { 
+            cancel: function () { 
+                // enableButton();
+            },
+            
+            somethingElse: {
+                text: 'Confirm',
+                btnClass: 'btn-green',
+                keys: ['enter', 'shift'],
+                action: function(){ 
+                    
+                    // initialize product order 
+                    var po = JSON.parse( getStorage('product_order') ); 
+                    postWithHeader(routes.orderSlip, po , function(response){ 
+                        redirectTo('/my-order');
+                    }); 
+                    
+                }
+            }
+        }
+    });
  
-    postWithHeader(routes.orderSlip, po , function(response){
-        console.log(response);
-        showSuccess('','Added Successfully!', function(){ 
-        }); 
-    }); 
-
 });
 
 function getComponentsOfProduct(){

@@ -6,10 +6,9 @@
 @endsection 
 
 @section('js')
-
 <script src="/js/pages/edit-order.js"></script>
 @endsection
-
+ 
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">  
