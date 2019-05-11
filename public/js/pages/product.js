@@ -74,11 +74,37 @@ $('#is_takeout').change('change', function(){
 
 $('#btn-m-minus').on('click', function(){ 
     var po = JSON.parse( getStorage('product_order') );   
-    var poSet = new Set(); 
     if(po.qty > 1){ 
         po.qty--; 
-        $.each(po.others, function(k,v){
-            v.qty = v.main_product_component_qty * po.qty;
+        // deduct sub component first
+        $.each(po.others, function(k,v){ 
+            var qty_to_be_deduct = 1 * v.main_product_component_qty;  
+            if( (v.others).length > 0 ){   
+                for(var i = 0; i < (v.others).length; i++){ 
+                    if(qty_to_be_deduct > 0){ // to check if there is qty to be deduct
+                        if( v.others[i].qty > 0){
+
+                            if( qty_to_be_deduct <= v.others[i].qty){
+                                v.others[i].qty = v.others[i].qty - qty_to_be_deduct;
+                                qty_to_be_deduct = 0;
+                            }
+ 
+                            if( v.others[i].qty == 0){ // should be removed if zero 
+                                var _id = '#'+po.product_id+'-'+v.product_id+'-categories-'+v.others[i].product_id+'-qty';
+                                
+                                $(_id).text(0);
+                                v.others.splice(i, 1);
+                            }
+                        }
+                    }
+                }
+            }
+ 
+            // deduct component
+            if(qty_to_be_deduct >= 0){
+                v.qty = v.qty - qty_to_be_deduct;
+            }
+
         }); 
     }  
     setStorage('product_order', JSON.stringify(po));
@@ -97,7 +123,7 @@ $('#btn-m-plus').on('click', function(){
 }); 
 
 $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){ 
-    //$(this).attr('disabled','disabled'); 
+    //$(this).attr('disabled','disabled');
     $.confirm({
         title: 'Confirmation!',
         content: 'You are about to submit this item as order, do you want to continue?',
@@ -393,7 +419,7 @@ function logicDisplay(){
         $.each(po.others, function(k,v){
             $.each(v.others, function(kk,vv){ 
                 var _id = '#'+po.product_id+'-'+v.product_id+'-categories-'+vv.product_id+'-qty';
-                $(_id).text(vv.qty); 
+                $(_id).text(vv.qty);
                 grand_total += vv.total;
             });
         });

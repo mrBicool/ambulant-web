@@ -9,7 +9,7 @@
     <script src="/js/plugins/jquery-confirm.min.js"></script>
     <script src="js/pages/my-order.js"></script>
 @endsection
-
+ 
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb"> 
@@ -60,10 +60,10 @@
                                         <div class="relative mrg-top-10">  
                                             <span class="pdd-right-20">PHP 0.00</span> 
                                             <button class="btn btn-info btn-sm">
-                                                    <i class="ti-pencil"></i>
+                                                <i class="ti-pencil"></i>
                                             </button>
                                             <button class="btn btn-danger btn-sm">
-                                                    <i class="ti-trash"></i>
+                                                <i class="ti-trash"></i>
                                             </button>
                                         </div> 
                                     </td>
@@ -74,20 +74,20 @@
                     <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
                 </div>
                 <div class="card-footer d-none d-md-inline-block">
-                        <div class="text-right">
-                            <div class="row">
-                                <div class="col-md-10 ml-auto mr-auto">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="pdd-vertical-5">
-                                                <p  class="no-mrg-btm"><b class="text-dark font-size-16">Sub Total </b > <i class="font-size-16" id="sub-total">0.00</i></p>
-                                            </div>
-                                        </div> 
+                    <div class="text-right">
+                        <div class="row">
+                            <div class="col-md-10 ml-auto mr-auto">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pdd-vertical-5">
+                                            <p  class="no-mrg-btm"><b class="text-dark font-size-16">Sub Total </b > <i class="font-size-16" id="sub-total">0.00</i></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="col-md-12 if-has-pending-order" style="display:none;">

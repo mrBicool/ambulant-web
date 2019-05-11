@@ -2,7 +2,7 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <div class="side-nav-logo">
-            <a href="index-2.html">
+            <a href="/">
                 <div class="logo logo-dark" style="background-image: url('/assets/images/logo/logo.png')"></div>
                 {{-- <div class="logo logo-white" style="background-image: url('assets/images/logo/logo-white.png')"></div> --}}
             </a>
