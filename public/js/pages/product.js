@@ -91,7 +91,6 @@ $('#btn-m-minus').on('click', function(){
  
                             if( v.others[i].qty == 0){ // should be removed if zero 
                                 var _id = '#'+po.product_id+'-'+v.product_id+'-categories-'+v.others[i].product_id+'-qty';
-                                
                                 $(_id).text(0);
                                 v.others.splice(i, 1);
                             }
