@@ -312,7 +312,7 @@ $('#btn-save-changes').on('click', function(){
             return;
         }
 
-        showSuccess('', 'Changes has been save.', function(){
+        showSuccess('', 'Successfully saved.', function(){
 
         });
     });

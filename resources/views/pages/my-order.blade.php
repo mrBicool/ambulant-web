@@ -192,7 +192,7 @@
                     </div>
                     <div class="card-footer border top">
                         <button id="btn-save-changes"  class="btn btn-primary btn-sm pull-right ">
-                            Save change's
+                            Save changes
                         </button>
                         {{-- <ul class="list-unstyled list-inline text-right pdd-vertical-5">
                             <li class="list-inline-item">
