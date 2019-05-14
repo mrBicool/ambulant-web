@@ -102,7 +102,7 @@
         <ul class="nav-right">
             <li class="user-profile dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img class="profile-img img-fluid" src="/assets/images/user.jpg" alt="">
+                    <img class="profile-img img-fluid" src="/assets/images/user.png" alt="">
                     <div class="user-info">
                         <span class="name pdd-right-5 current-user-name">Nate Leong</span>
                         <i class="ti-angle-down font-size-10"></i>

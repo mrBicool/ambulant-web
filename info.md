@@ -21,7 +21,7 @@
     ],
     "loyalty" : {
         "type" : "",
-        "identification":"",
+        "identification" : "",
         "name"
     }
 }
