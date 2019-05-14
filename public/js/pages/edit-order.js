@@ -97,6 +97,7 @@ $('#btn-m-minus').on('click', function(){
     var eos = JSON.parse( getStorage('edit-order-slip') );    
     if(eos.data.qty > 1){ 
         eos.data.qty--; 
+        eos.data.total = eos.data.qty * eos.data.price; 
         $.each(eos.data.others, function(k,v){
             //v.qty = v.main_product_component_qty * po.qty;
             var qty_to_be_deduct = 1 * v.main_product_component_qty;  

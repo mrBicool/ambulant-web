@@ -76,6 +76,7 @@ $('#btn-m-minus').on('click', function(){
     var po = JSON.parse( getStorage('product_order') );   
     if(po.qty > 1){ 
         po.qty--; 
+        po.total = po.qty * po.price; 
         // deduct sub component first
         $.each(po.others, function(k,v){ 
             var qty_to_be_deduct = 1 * v.main_product_component_qty;  
@@ -392,6 +393,7 @@ function btnComponentCategoryPlus(id){
 }
 
 function logicDisplay(){ 
+    console.log('moew');
     var grand_total = 0; 
 
     var po = JSON.parse( getStorage('product_order') );  
@@ -412,6 +414,8 @@ function logicDisplay(){
         }); 
 
 
+
+
         /**
          * SUB COMPONENTS SECTION
          */
@@ -422,6 +426,7 @@ function logicDisplay(){
                 grand_total += vv.total;
             });
         });
-
+    
+    console.log(':: ' + numberWithCommas(grand_total));
     $('#grand-total').text('TOTAL : ' + numberWithCommas(grand_total));
 }
