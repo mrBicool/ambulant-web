@@ -26,6 +26,7 @@ function getProduct(){
   
         displayProduct(response.result);
         getComponentsOfProduct();
+        getComponentsNonModifiableOfProduct();
     });
 }
 
@@ -163,7 +164,8 @@ function getComponentsOfProduct(){
     let outlet = JSON.parse(getStorage('outlet'));  
     let data = {
         product_id  : getStorage('selected-product'),
-        outlet_id   : outlet.id
+        outlet_id   : outlet.id,
+        group_by    : 'mc'
     }; 
     postWithHeader(routes.productComponents, data, function(response){
         if(response.success == false){ 
@@ -172,6 +174,31 @@ function getComponentsOfProduct(){
             return;
         }  
         componentsDisplayer(response.result.data); 
+    });
+}
+
+function getComponentsNonModifiableOfProduct(){
+    let outlet = JSON.parse(getStorage('outlet'));  
+    let data = {
+        product_id  : getStorage('selected-product'),
+        outlet_id   : outlet.id,
+        group_by    : 'nmc'
+    }; 
+    postWithHeader(routes.productComponents, data, function(response){
+        if(response.success == false){ 
+            showError('',response.message, function(){
+            });
+            return;
+        }
+        console.log(response.result.data);
+        var container = $('.nmc');
+        container.empty();
+        $.each(response.result.data, function(k,v){
+            container.append(
+                '<li> '+ v.description+' | ' + parseInt(v.quantity, 10) + '</li>'
+            );
+        });
+
     });
 }
 

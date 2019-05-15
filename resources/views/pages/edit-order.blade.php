@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Completed Order')  
+@section('title', 'Edit Order')  
 
 @section('css')
 <link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 

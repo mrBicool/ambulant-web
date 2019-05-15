@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', "") 
+@section('title', "Product") 
 
 @section('css')
 <link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
@@ -39,8 +39,16 @@
                                                     <button class="btn btn-danger" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>
                                                     <button class="btn btn-success" type="button" id="btn-m-plus"><i class="ti-plus"></i></button>
                                                 </div>
-                                            </div>
+                                            </div> 
                                     </div>
+                                    <ul class="list tick bullet-primary p-3 nmc">
+                                        {{-- <li>Lorem ipsum dolor sit amet</li>
+                                        <li>Consectetur adipiscing elit</li>
+                                        <li>Integer molestie lorem at massa</li>
+                                        <li>Facilisis in pretium nisl aliquet</li>
+                                        <li>Nulla volutpat aliquam velit </li> --}}
+                                    </ul>
+                                    
                             </div>
                             <div class="col-md-6">
                                 <div class="checkbox border bottom">
