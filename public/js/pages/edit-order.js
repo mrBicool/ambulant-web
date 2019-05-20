@@ -29,6 +29,7 @@ function getProduct(order){
          
         displayProduct(response.result,order);
         getComponentsOfProduct(order);
+        getComponentsNonModifiableOfProduct();
     });
 }
 
@@ -160,6 +161,35 @@ function getComponentsOfProduct(order){
             return;
         }  
         componentsDisplayer(response.result.data, order); 
+    });
+}
+
+function getComponentsNonModifiableOfProduct(){
+    let outlet = JSON.parse(getStorage('outlet'));  
+    var eos = JSON.parse( getStorage('edit-order-slip') ); 
+    let data = {
+        product_id  : eos.data.main_product_id,
+        outlet_id   : outlet.id,
+        group_by    : 'nmc'
+    }; 
+    postWithHeader(routes.productComponents, data, function(response){
+        if(response.success == false){ 
+            showError('',response.message, function(){
+            });
+            return;
+        }
+        console.log(response.result.data);
+        var container = $('.nmc');
+        container.empty();
+        $.each(response.result.data, function(k,v){
+            container.append(
+                // '<li> '+ v.description+' | ' + parseInt(v.quantity, 10) + '</li>'
+                '<li> '+ v.description+' </li>'
+            );
+        });
+
+        setStorage('none-modifiable-item', JSON.stringify(response.result.data));
+
     });
 }
 
@@ -503,6 +533,8 @@ $('.btn-info.add-to-order').on('click', function(){
     $(this).attr('disabled','disabled');
 
     let eos = JSON.parse(getStorage('edit-order-slip'));
+    var nmc = JSON.parse( getStorage('none-modifiable-item') );
+    eos.none_modifiable_component = nmc;
 
     var data = {
         _method: 'PATCH', 

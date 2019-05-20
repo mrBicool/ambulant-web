@@ -197,7 +197,8 @@ function getComponentsNonModifiableOfProduct(){
         container.empty();
         $.each(response.result.data, function(k,v){
             container.append(
-                '<li> '+ v.description+' | ' + parseInt(v.quantity, 10) + '</li>'
+                // '<li> '+ v.description+' | ' + parseInt(v.quantity, 10) + '</li>'
+                '<li> '+ v.description+' </li>'
             );
         });
 
