@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                     <div class="mrg-top-1 text-center">
-                                            <div class="input-group">
+                                        <div class="input-group">
                                                 <input id="m-product-qty" type="text" class="form-control" placeholder="Qty" value="1" disabled>
                                                 <div class="input-group-append" id="button-addon4">
                                                     <button class="btn btn-danger" type="button" id="btn-m-minus"><i class="ti-minus"></i></button>

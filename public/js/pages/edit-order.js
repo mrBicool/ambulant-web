@@ -150,7 +150,8 @@ function getComponentsOfProduct(order){
     var eos = JSON.parse( getStorage('edit-order-slip') ); 
     let data = {
         product_id  : eos.data.main_product_id,
-        outlet_id   : outlet.id
+        outlet_id   : outlet.id,
+        group_by    : 'mc'
     }; 
     postWithHeader(routes.productComponents, data, function(response){
         if(response.success == false){ 
