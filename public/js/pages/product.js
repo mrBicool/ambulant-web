@@ -148,7 +148,9 @@ $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){
                 action: function(){ 
                     
                     // initialize product order 
-                    var po = JSON.parse( getStorage('product_order') ); 
+                    var po = JSON.parse( getStorage('product_order') );
+                    var nmc = JSON.parse( getStorage('none-modifiable-item') );
+                    po.none_modifiable_component = nmc;
                     postWithHeader(routes.orderSlip, po , function(response){ 
                         redirectTo('/');
                     }); 
@@ -198,6 +200,8 @@ function getComponentsNonModifiableOfProduct(){
                 '<li> '+ v.description+' | ' + parseInt(v.quantity, 10) + '</li>'
             );
         });
+
+        setStorage('none-modifiable-item', JSON.stringify(response.result.data));
 
     });
 }
