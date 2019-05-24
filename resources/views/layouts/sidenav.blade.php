@@ -58,6 +58,14 @@
                     </li> 
                 </ul>
             </li> 
+            <li class="nav-item">
+                <a class="" href="/claiming">
+                    <span class="icon-holder">
+                        <i class="ti-gift"></i>
+                    </span>
+                    <span class="title">Claiming</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
