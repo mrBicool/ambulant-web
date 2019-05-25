@@ -20,3 +20,4 @@ Route::get('/my-order',             'PagesController@myOrder');
 Route::get('/my-order/edit',        'PagesController@editOrder'); 
 Route::get('/pending-order',        'PagesController@pendingOrder');
 Route::get('/completed-order',      'PagesController@completedOrder');
+Route::get('/claiming',             'PagesController@claiming');

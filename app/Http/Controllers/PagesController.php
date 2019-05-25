@@ -42,4 +42,8 @@ class PagesController extends Controller
     public function editOrder(){
         return view('pages.edit-order');
     }
+
+    public function claiming(){
+        return view('pages.claiming');
+    }
 }
