@@ -18,6 +18,7 @@ function btnSubmit(){
         if(code.val().trim() == ''){
             code.addClass('error');
             code.focus();
+            $('#if-succes').hide();
             showWarning('','Code is requried!', function(){
 
             });
