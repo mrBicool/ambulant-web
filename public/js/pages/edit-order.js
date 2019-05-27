@@ -548,6 +548,7 @@ $('.btn-info.add-to-order').on('click', function(){
             });
             return;
         } 
+        
         showSuccess('','Success', function(){
             redirectTo('/my-order');
         });
