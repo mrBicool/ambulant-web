@@ -17,8 +17,8 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://172.16.12.130:8005/api';
-var local_printer_api = "http://172.16.12.130:8007/api";
+var api = 'http://172.16.12.145:8006/api';
+var local_printer_api = "http://172.16.12.145:8009/api";
 var routes = {
     login:                      '/login',
     categories:                 '/outlet/category',
