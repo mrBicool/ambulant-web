@@ -99,19 +99,28 @@
                         
                         <div class="row">
                             <div class="col-md-6">
-                                    <div class="mrg-top-1">
-                                        <div class="form-group">
-                                            <label for="head-count">Head Count</label>
-                                            <div class="input-group input-group-sm"> 
-                                                <input id="head-count" type="text" class="form-control input-sm" placeholder="Qty" value="1" disabled="" >
-                                                <div class="input-group-append" id="button-addon4">
-                                                    <button class="btn btn-default btn-xs" type="button" id="btn-head-count-minus"><i class="ti-minus"></i></button>
-                                                    <button class="btn btn-default" type="button" id="btn-head-count-plus"><i class="ti-plus"></i></button>
-                                                </div>
+                                <div class="mrg-top-1">
+                                    <div class="form-group">
+                                        <label for="head-count">Head Count</label>
+                                        <div class="input-group input-group-sm"> 
+                                            <input id="head-count" type="text" class="form-control input-sm" placeholder="Qty" value="1" disabled="" >
+                                            <div class="input-group-append" id="button-addon4">
+                                                <button class="btn btn-default btn-xs" type="button" id="btn-head-count-minus"><i class="ti-minus"></i></button>
+                                                <button class="btn btn-default" type="button" id="btn-head-count-plus"><i class="ti-plus"></i></button>
                                             </div>
                                         </div>
-                                            
                                     </div>
+                                        
+                                </div>
+                                <div class="mrg-top-1">
+                                    <div class="form-group">
+                                        <label for="head-count">TABLE NO.</label>
+                                        <div class="input-group input-group-sm"> 
+                                            <input id="table-not" type="text" class="form-control input-lg" placeholder="Enter Table No."  >
+                                             
+                                        </div>
+                                    </div> 
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mrg-top-1">

@@ -48,7 +48,9 @@ function displayProduct(data){
         instruction : "",
         is_take_out : false,
         part_number : data.part_number,
-        others:[]
+        others:[],
+        guest_no : 1,
+        guest_type : 1
     };  
 
     setStorage('product_order', JSON.stringify(po));
@@ -462,3 +464,15 @@ function logicDisplay(){
     console.log(':: ' + numberWithCommas(grand_total));
     $('#grand-total').text('TOTAL : ' + numberWithCommas(grand_total));
 }
+
+$('input[type=radio][name=guest-type]').change(function() {
+    var po = JSON.parse( getStorage('product_order') );
+    po.guest_type = parseInt(this.value);
+    setStorage('product_order', JSON.stringify(po)); 
+});
+
+$('#guest-no').on('change', function(){
+    var po = JSON.parse( getStorage('product_order') );
+    po.guest_no = parseInt(this.value);
+    setStorage('product_order', JSON.stringify(po));
+});

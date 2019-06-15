@@ -48,6 +48,12 @@ function displayProducts(data){
                     '<div class="card-block padding-25">'+
                         '<ul class="list-unstyled list-info">'+
                             '<li>'+ 
+                                '<div class="text-center">'+
+                                // '<span class="thumb-img " style="border:1px solid gray">'+
+                                    // '<i class="ti-help-alt text-primary font-size-30"></i>'+
+                                    '<img src="/assets/products/sample.jpg" class=" " style="width:200px; height:200px;">'+
+                                // '</span>'+
+                                '</div>'+
                                 '<div class="info"  style="padding-left: 0px;">'+
                                     v.srp +
                                     '<b class="text-dark font-size-18">&nbsp;| '+v.description+'</b>'+
