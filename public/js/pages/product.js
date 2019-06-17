@@ -24,17 +24,18 @@ function getProduct(){
             return;
         }
   
-        displayProduct(response.result);
+        displayProduct(response.result,response.base_url);
         getComponentsOfProduct();
         getComponentsNonModifiableOfProduct();
     });
 }
 
-function displayProduct(data){
+function displayProduct(data, base_url){
     
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
-
+    $('#product-image').attr('src', base_url + data.img_path);
+    
     var po = JSON.parse( getStorage('product_order') );  
     po = {
         product_id : parseInt(data.product_id),

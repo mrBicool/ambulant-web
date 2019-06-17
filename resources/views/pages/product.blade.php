@@ -24,7 +24,7 @@
         <div class="col-md-12">
                 <div class="widget-profile-1 card">
                     <div class="profile border bottom">
-                        <img class="mrg-top-30" src="/assets/products/sample.jpg" alt="" style="width:200px; height:200px;">
+                        <img id="product-image" class="mrg-top-30" src="" alt="" style="width:200px; height:200px;">
                         <h4 class="mrg-top-20 no-mrg-btm text-semibold" id="product_name">...</h4>
                         <p id="product_price">0.00</p>
                     </div>

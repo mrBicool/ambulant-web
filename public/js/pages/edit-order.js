@@ -39,6 +39,9 @@ function displayProduct(data, order){
     var current_qty = 1;
     var is_take_out = false;
     var instruction = '';
+    var guest_no = 1;
+    var guest_type = 1;
+
     $.each(order, function(k,v){
         if(v.product_id == v.main_product_id){
             //console.log(k,v);
@@ -53,12 +56,26 @@ function displayProduct(data, order){
             } 
             
             instruction = v.remarks;
+
+            guest_no    = parseInt(v.guest_no);
+            guest_type  = parseInt(v.guest_type);
+
         }
     });
     // --
     
+    /**
+     * Setting up the value's
+     */
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
+    $('#guest-no').val(guest_no);
+
+    var _guest_type = $('input:radio[name=guest-type]');
+    if(_guest_type.is(':checked') === false) {
+        _guest_type.filter('[value='+guest_type+']').prop('checked', true);
+    }
+
 
     var eos = JSON.parse( getStorage('edit-order-slip') );  
     eos.data = {
@@ -73,7 +90,9 @@ function displayProduct(data, order){
         instruction : instruction,
         is_take_out : is_take_out,
         part_number : data.part_number,
-        others:[]
+        others:[],
+        guest_no : guest_no,
+        guest_type : guest_type
     };  
 
     setStorage('edit-order-slip', JSON.stringify(eos)); 
@@ -554,4 +573,16 @@ $('.btn-info.add-to-order').on('click', function(){
         });
         
     }); 
+});
+
+$('input[type=radio][name=guest-type]').change(function() {
+    var eos = JSON.parse( getStorage('edit-order-slip') );
+    eos.data.guest_type = parseInt(this.value);
+    setStorage('edit-order-slip', JSON.stringify(eos)); 
+});
+
+$('#guest-no').on('change', function(){
+    var eos = JSON.parse( getStorage('edit-order-slip') );
+    eos.data.guest_no = parseInt(this.value);
+    setStorage('edit-order-slip', JSON.stringify(eos));
 });

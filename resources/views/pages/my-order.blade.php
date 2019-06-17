@@ -93,7 +93,7 @@
         <div class="col-md-12 if-has-pending-order" style="display:none;">
                 <div class="card">
                     <div class="card-heading">
-                        <h4 class="card-title">Customer Info's</h4>
+                        <h4 class="card-title">Customer Detail(s)</h4>
                     </div>
                     <div class="card-body">
                         
@@ -101,7 +101,7 @@
                             <div class="col-md-6">
                                 <div class="mrg-top-1">
                                     <div class="form-group">
-                                        <label for="head-count">Head Count</label>
+                                        <label for="head-count">No. of Guest(s)</label>
                                         <div class="input-group input-group-sm"> 
                                             <input id="head-count" type="text" class="form-control input-sm" placeholder="Qty" value="1" disabled="" >
                                             <div class="input-group-append" id="button-addon4">
@@ -112,7 +112,7 @@
                                     </div>
                                         
                                 </div>
-                                <div class="mrg-top-1">
+                                {{-- <div class="mrg-top-1">
                                     <div class="form-group">
                                         <label for="head-count">TABLE NO.</label>
                                         <div class="input-group input-group-sm"> 
@@ -120,9 +120,21 @@
                                              
                                         </div>
                                     </div> 
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-6">
+
+                                <div class="mrg-top-1">
+                                    <div class="form-group">
+                                        <label for="head-count">TABLE NO.</label>
+                                        <div class="input-group input-group-sm"> 
+                                            <input id="table-no" type="text" class="form-control input-lg" placeholder="Enter Table No."  >
+                                                
+                                        </div>
+                                    </div> 
+                                </div>
+
+                                <!--
                                 <div class="mrg-top-1">
                                     <div class="form-group">
                                         <label for="mobile-number">Search Customer</label>
@@ -195,6 +207,8 @@
                                             </div>
                                     </div>
                                 </div>
+                                -->
+
                             </div>
                         </div>
                         

@@ -2,7 +2,7 @@
 <footer class="content-footer">
     <div class="footer">
         <div class="copyright">
-            <span>Enchanted Kingdom</span>
+            <span>LES AMIS</span>
             <span class="go-right">v1.0</span>
             {{-- <span class="go-right">
                 

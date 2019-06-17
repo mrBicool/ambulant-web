@@ -53,6 +53,27 @@
                                     <label for="is_takeout">Is Takeout?</label>
                                 </div> 
 
+                                <div class="mrg-top-30 border bottom">
+                                    <div class="radio radio-inline radio-primary">
+                                        <input value="1" type="radio" name="guest-type" id="form-5-1" >
+                                        <label for="form-5-1">Regular</label>
+                                    </div>
+                                    <div class="radio radio-inline radio-primary">
+                                        <input value="2" type="radio" name="guest-type" id="form-5-2" >
+                                        <label for="form-5-2">Senior</label>
+                                    </div>
+                                    <div class="radio radio-inline radio-primary">
+                                        <input value="3" type="radio" name="guest-type" id="form-5-3">
+                                        <label for="form-5-3">Pwd</label>
+                                    </div>
+
+                                    <div class="input-icon form-group">
+                                        <i class="ti-face-smile"></i>
+                                        <input id="guest-no" min="1" type="number" class="form-control m-b" placeholder="Enter Guess No." value="1">
+                                        <small>Enter Guess no.</small>
+                                    </div> 
+                                </div>
+
                                 <div class="components-container">
                                     {{-- <div class="mrg-top-0">
                                         <div id="accordion-ask-2" class="accordion border-less" role="tablist" aria-multiselectable="true">
