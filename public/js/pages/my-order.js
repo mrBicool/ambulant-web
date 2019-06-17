@@ -89,6 +89,26 @@ function osDisplayer(header, details){
                      }
                 }
             });
+
+            // guest type & no
+            $.each(v, function(kk,vv){ 
+                if(vv.product_id == vv.main_product_id){ 
+                    os_txt += '<span class="sub-title">- Guest No. ('+vv.guest_no+')</span>'; 
+
+                    if(vv.guest_type == 1){
+                        os_txt += '<span class="sub-title">- Guest Type (Regular)</span>'; 
+                    }
+
+                    if(vv.guest_type == 2){
+                        os_txt += '<span class="sub-title">- Guest Type (Senior)</span>'; 
+                    }
+
+                    if(vv.guest_type == 3){
+                        os_txt += '<span class="sub-title">- Guest Type (Pwd)</span>'; 
+                    }
+
+                }
+            });
     
             os_txt += '</div>'+
                     '</div>'+
