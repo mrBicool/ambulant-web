@@ -27,13 +27,13 @@ function getProduct(order){
             return;
         }
          
-        displayProduct(response.result,order);
+        displayProduct(response.result, order, response.base_url);
         getComponentsOfProduct(order);
         getComponentsNonModifiableOfProduct();
     });
 }
 
-function displayProduct(data, order){
+function displayProduct(data, order, base_url){
 
     // --
     var current_qty = 1;
@@ -70,6 +70,7 @@ function displayProduct(data, order){
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
     $('#guest-no').val(guest_no);
+    $('#product-image').attr('src', base_url + data.img_path);
 
     var _guest_type = $('input:radio[name=guest-type]');
     if(_guest_type.is(':checked') === false) {
