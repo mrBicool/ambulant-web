@@ -51,6 +51,7 @@ function osDisplayer(header, details){
             var header_id = null;
             var main_product_id = null;
             var sequence = null;
+            var kitchen_status = null;
             os_txt += '<tr>'+
                 '<td width="">'+
                     '<div class="list-info">'+ 
@@ -59,6 +60,11 @@ function osDisplayer(header, details){
             $.each(v, function(kk,vv){ 
                 if(vv.product_id == vv.main_product_id){
                     total += (vv.qty * vv.srp);
+
+                    if(vv.kitchen_status != null){
+                        kitchen_status = vv.kitchen_status;
+                    }
+
                     os_txt += vv.qty + 'X' +
                         '</div>'+
                         '<div class="info">'+
@@ -78,6 +84,10 @@ function osDisplayer(header, details){
                         const  _total = (vv.qty * vv.srp) <= 0 ? 'FREE' : (vv.qty * vv.srp);
                         os_txt += 
                                 '<span class="sub-title">+ '+ vv.qty + 'x ' +vv.name+' ( '+ _total + ' )</span>';
+
+                        if(vv.kitchen_status != null){
+                            kitchen_status = vv.kitchen_status;
+                        }
                     }
                 });
     
@@ -109,6 +119,11 @@ function osDisplayer(header, details){
 
                 }
             });
+
+            // Kitchen Status   
+            if(kitchen_status != null){
+                os_txt += '<span class="sub-title">* '+ vv.kitchen_status+' *</span>'; 
+            }
     
             os_txt += '</div>'+
                     '</div>'+
