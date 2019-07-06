@@ -43,7 +43,12 @@ var routes = {
         post:                   '/my-order/edit'
     },
     orderSlipMarkAsDone:        '/orderslip/mark-as-done',
-    orderSlipChangeOs:          '/orderslip/change-os'
+    orderSlipChangeOs:          '/orderslip/change-os',
+    aboutTableSomething: {
+        checkIfThereIsAnActiveOrder : '/is-there-an-active-order'
+    },
+    guestSelection:             '/guest-selection',
+    tableEntry :                '/orderslip/table-entry'
 };
 let main_cart;
 var main_cart_other;

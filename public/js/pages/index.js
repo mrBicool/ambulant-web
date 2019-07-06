@@ -5,8 +5,33 @@ $(document).ready(function(){
         return;
     }
 
-    getCategories();
+    //getCategories();
+
+    checkIfThereIsAnActiveOrder();
 });
+
+function checkIfThereIsAnActiveOrder(){
+    getWithHeader(
+        routes.aboutTableSomething.checkIfThereIsAnActiveOrder,
+        {},
+        function(response){
+            console.log(response);
+
+            if(response.success == false && response.status == 200){
+                redirectTo('/tables');
+                return;
+            }
+
+
+            if(getStorage('selected_guest_no')==''){
+                redirectTo('guest-selection');
+                return;
+            }
+            //redirect to guest selection.
+            //redirectTo('/guest-selection');
+            getCategories();
+        });
+}
 
 function getCategories(){
     postWithHeader(routes.categories, {}, function(response){

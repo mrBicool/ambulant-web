@@ -46,4 +46,13 @@ class PagesController extends Controller
     public function claiming(){
         return view('pages.claiming');
     }
+
+    public function tables(){
+        return view('pages.tables');
+    }
+
+    public function guestSelection(){
+        return view('pages.guest-selection');
+        
+    }
 }

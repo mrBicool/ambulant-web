@@ -69,11 +69,11 @@
                                         <label for="form-5-3">Pwd</label>
                                     </div>
 
-                                    <div class="input-icon form-group">
+                                    {{-- <div class="input-icon form-group">
                                         <i class="ti-face-smile"></i>
                                         <input id="guest-no" min="1" type="number" class="form-control m-b" placeholder="Enter Guess No." value="1">
                                         <small>Enter Guess no.</small>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 

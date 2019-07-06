@@ -50,7 +50,7 @@ function displayProduct(data, base_url){
         is_take_out : false,
         part_number : data.part_number,
         others:[],
-        guest_no : 1,
+        guest_no : parseInt( getStorage('selected_guest_no') ),
         guest_type : 1
     };  
 
@@ -126,7 +126,7 @@ $('#btn-m-plus').on('click', function(){
     logicDisplay();
 }); 
 
-$('.btn.btn-flat.btn-info.add-to-order').on('click', function(){ 
+$('.btn.btn-info.add-to-order').on('click', function(){ 
     //$(this).attr('disabled','disabled');
     $.confirm({
         title: 'Confirmation!',
@@ -155,6 +155,7 @@ $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){
                     var nmc = JSON.parse( getStorage('none-modifiable-item') );
                     po.none_modifiable_component = nmc;
                     postWithHeader(routes.orderSlip, po , function(response){ 
+                        setStorage('selected_guest_no','');
                         redirectTo('/');
                     }); 
                     
