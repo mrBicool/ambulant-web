@@ -3,6 +3,35 @@
 
 @section('css')
 <link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
+ 
+<style>
+    .namber {
+        position: absolute; 
+        top: 0;
+        left: 0; 
+        border-radius: 0; 
+        height: 35px;
+        width: 35px;
+        padding-top:5px;
+        font-size: 1.5em;
+    }
+
+   img.avatar{
+       
+       
+   }
+
+   .avatar-card{
+    flex-basis: 200px !important ;
+   }
+
+   @media(max-width:767px){
+    .avatar-card{
+        flex-basis: 400px !important ;
+    }
+   }
+   
+</style> 
 @endsection
 
 @section('js')
@@ -147,10 +176,69 @@
                             <li class="list-inline-item">
                                 <button class="btn btn-info add-to-order">Submit</button>
                             </li>
+                            <li class="list-inline-item">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">Change guest no.</button>
+                            </li>
                         </ul>
                     </div>
                 </div>
         </div> 
     </div>
 </div>
+
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <a class="modal-close" href="#" data-dismiss="modal">
+                    <i class="ti-close"></i>
+                </a>
+
+                <div class="padding-15">
+                    <div class="row" id="guest-container">
+                        <div class="col-md-3 col-sm-6">
+                            <div class=" card  avatar-card text-center">
+                                <div class="card-body">
+                                    <span class="badge badge-pill badge-success namber" >1</span>
+                                    <img data-guest-no="'+guest+'" src="/assets/images/avatar.png" class="img-fluid avatar" alt="Responsive image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class=" card  avatar-card text-center">
+                                <div class="card-body">
+                                    <span class="badge badge-pill badge-success namber" >1</span>
+                                    <img data-guest-no="'+guest+'" src="/assets/images/avatar.png" class="img-fluid avatar" alt="Responsive image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class=" card  avatar-card text-center">
+                                <div class="card-body">
+                                    <span class="badge badge-pill badge-success namber" >1</span>
+                                    <img data-guest-no="'+guest+'" src="/assets/images/avatar.png" class="img-fluid avatar" alt="Responsive image">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="ml-auto col-md-5">
+                            <h3 class="mrg-btm-20 mrg-top-130">Download App</h3>
+                            <p>Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            <div class="mrg-top-20">
+                                <a href="#" data-dismiss="modal" class="btn btn-info">Noted!</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img class="img-fluid mrg-horizon-auto" src="assets/images/others/img-2.png" alt="">
+                        </div> --}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>  
+ 
 @endsection
