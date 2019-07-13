@@ -107,7 +107,7 @@ function displayProduct(data, base_url){
     logicDisplay();
 
 
-    discount();
+    //discount();
 }
 
 $('#instruction').on('change', function(){
@@ -164,7 +164,7 @@ $('#btn-m-minus').on('click', function(){
     }  
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
-    discount();
+    // discount();
 });
 
 $('#btn-m-plus').on('click', function(){ 
@@ -177,7 +177,7 @@ $('#btn-m-plus').on('click', function(){
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
 
-    discount();
+    // discount();
 }); 
 
 $('.btn.btn-info.add-to-order').on('click', function(){ 
@@ -526,7 +526,7 @@ $('input[type=radio][name=guest-type]').change(function() {
     po.guest_type = parseInt(this.value);
     setStorage('product_order', JSON.stringify(po)); 
 
-    discount();
+    // discount();
 });
 
 // $('#guest-no').on('change', function(){
