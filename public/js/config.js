@@ -17,7 +17,8 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://172.16.12.115:8007/api';
+// var api = 'http://172.16.12.115:8007/api';
+var api = 'http://ambulant-api.test/api';
 var local_printer_api = "http://172.16.12.115:8009/api";
 var routes = {
     login:                      '/login',
