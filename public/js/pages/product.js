@@ -95,12 +95,19 @@ function displayProduct(data, base_url){
         part_number : data.part_number,
         others:[],
         guest_no : parseInt( getStorage('selected_guest_no') ),
-        guest_type : 1
+        guest_type : 1,
+        discount : 0,
+        total_without_vat : 0,
+        vat : 0
+        
     };  
 
     setStorage('product_order', JSON.stringify(po));
 
     logicDisplay();
+
+
+    discount();
 }
 
 $('#instruction').on('change', function(){
@@ -157,6 +164,7 @@ $('#btn-m-minus').on('click', function(){
     }  
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
+    discount();
 });
 
 $('#btn-m-plus').on('click', function(){ 
@@ -168,6 +176,8 @@ $('#btn-m-plus').on('click', function(){
     });   
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
+
+    discount();
 }); 
 
 $('.btn.btn-info.add-to-order').on('click', function(){ 
@@ -515,10 +525,35 @@ $('input[type=radio][name=guest-type]').change(function() {
     var po = JSON.parse( getStorage('product_order') );
     po.guest_type = parseInt(this.value);
     setStorage('product_order', JSON.stringify(po)); 
+
+    discount();
 });
 
-$('#guest-no').on('change', function(){
+// $('#guest-no').on('change', function(){
+//     var po = JSON.parse( getStorage('product_order') );
+//     po.guest_no = parseInt(this.value);
+//     setStorage('product_order', JSON.stringify(po)); 
+//     discount();
+// });
+
+function discount(){
+    var new_price = 0;
     var po = JSON.parse( getStorage('product_order') );
-    po.guest_no = parseInt(this.value);
+  
+    po.total_without_vat = (po.total/1.12);
+    po.vat = po.total_without_vat * .12 ;
+
+    if (po.guest_type == 2 || po.guest_type == 3 ){  
+        po.discount= po.total_without_vat * .20;
+        
+        new_price = po.total_without_vat - po.discount;
+    }else{
+        po.discount = 0;
+        new_price = po.total - po.discount;
+    }
+    
     setStorage('product_order', JSON.stringify(po));
-});
+    
+
+    $('#grand-total').text('TOTAL : ' + numberWithCommas(new_price));
+}

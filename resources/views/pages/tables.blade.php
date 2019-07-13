@@ -17,7 +17,7 @@
         left: 0; 
         border-radius: 0; 
         height: 35px;
-        width: 35px;
+        width: fit-content;
         padding-top:5px;
         font-size: 1.5em;
     }
