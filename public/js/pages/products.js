@@ -24,7 +24,7 @@ function getProducts(){
             return;
         }
  
-        displayProducts(response.result.data);
+        displayProducts(response.result.data,response.base_url);
         if( response.result.next_page_url != null){
             paginate_counter++;
             getProducts();
@@ -32,7 +32,7 @@ function getProducts(){
     });
 }
 
-function displayProducts(data){
+function displayProducts(data,base_url){
 
     var cc = $('#container');
 
@@ -48,6 +48,12 @@ function displayProducts(data){
                     '<div class="card-block padding-25">'+
                         '<ul class="list-unstyled list-info">'+
                             '<li>'+ 
+                                '<div class="text-center">'+
+                                // '<span class="thumb-img " style="border:1px solid gray">'+
+                                    // '<i class="ti-help-alt text-primary font-size-30"></i>'+
+                                    // '<img src="'+ base_url + v.img_path+'" class=" " style="width:200px; height:200px;">'+
+                                // '</span>'+
+                                '</div>'+
                                 '<div class="info"  style="padding-left: 0px;">'+
                                     v.srp +
                                     '<b class="text-dark font-size-18">&nbsp;| '+v.description+'</b>'+

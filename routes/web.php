@@ -21,3 +21,5 @@ Route::get('/my-order/edit',        'PagesController@editOrder');
 Route::get('/pending-order',        'PagesController@pendingOrder');
 Route::get('/completed-order',      'PagesController@completedOrder');
 Route::get('/claiming',             'PagesController@claiming');
+Route::get('/tables',               'PagesController@tables');
+Route::get('/guest-selection',      'PagesController@guestSelection');

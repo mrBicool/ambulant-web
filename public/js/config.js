@@ -17,8 +17,8 @@ $(document).ready(function(){
 }); 
 
 //global variable for all page  
-var api = 'http://172.16.12.37:8005/api';
-var local_printer_api = "http://172.16.12.37:8007/api";
+var api = 'http://172.16.12.115:8007/api';
+var local_printer_api = "http://172.16.12.115:8009/api";
 var routes = {
     login:                      '/login',
     categories:                 '/outlet/category',
@@ -43,7 +43,12 @@ var routes = {
         post:                   '/my-order/edit'
     },
     orderSlipMarkAsDone:        '/orderslip/mark-as-done',
-    orderSlipChangeOs:          '/orderslip/change-os'
+    orderSlipChangeOs:          '/orderslip/change-os',
+    aboutTableSomething: {
+        checkIfThereIsAnActiveOrder : '/is-there-an-active-order'
+    },
+    guestSelection:             '/guest-selection',
+    tableEntry :                '/orderslip/table-entry'
 };
 let main_cart;
 var main_cart_other;
@@ -305,7 +310,7 @@ function validateContactNumber(value) {
 
 function cl(arr = arr() ){
     arr.forEach(element => {
-        //console.log(element);
+        console.log(element);
     });
 }
 

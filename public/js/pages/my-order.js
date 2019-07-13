@@ -51,6 +51,7 @@ function osDisplayer(header, details){
             var header_id = null;
             var main_product_id = null;
             var sequence = null;
+            var kitchen_status = null;
             os_txt += '<tr>'+
                 '<td width="">'+
                     '<div class="list-info">'+ 
@@ -59,6 +60,11 @@ function osDisplayer(header, details){
             $.each(v, function(kk,vv){ 
                 if(vv.product_id == vv.main_product_id){
                     total += (vv.qty * vv.srp);
+
+                    if(vv.kitchen_status != null){
+                        kitchen_status = vv.kitchen_status;
+                    }
+
                     os_txt += vv.qty + 'X' +
                         '</div>'+
                         '<div class="info">'+
@@ -78,6 +84,10 @@ function osDisplayer(header, details){
                         const  _total = (vv.qty * vv.srp) <= 0 ? 'FREE' : (vv.qty * vv.srp);
                         os_txt += 
                                 '<span class="sub-title">+ '+ vv.qty + 'x ' +vv.name+' ( '+ _total + ' )</span>';
+
+                        if(vv.kitchen_status != null){
+                            kitchen_status = vv.kitchen_status;
+                        }
                     }
                 });
     
@@ -89,6 +99,31 @@ function osDisplayer(header, details){
                      }
                 }
             });
+
+            // guest type & no
+            $.each(v, function(kk,vv){ 
+                if(vv.product_id == vv.main_product_id){ 
+                    os_txt += '<span class="sub-title">- Guest No. ('+vv.guest_no+')</span>'; 
+
+                    if(vv.guest_type == 1){
+                        os_txt += '<span class="sub-title">- Guest Type (Regular)</span>'; 
+                    }
+
+                    if(vv.guest_type == 2){
+                        os_txt += '<span class="sub-title">- Guest Type (Senior)</span>'; 
+                    }
+
+                    if(vv.guest_type == 3){
+                        os_txt += '<span class="sub-title">- Guest Type (Pwd)</span>'; 
+                    }
+
+                }
+            });
+
+            // Kitchen Status   
+            if(kitchen_status != null){
+                os_txt += '<span class="sub-title">* '+ vv.kitchen_status+' *</span>'; 
+            }
     
             os_txt += '</div>'+
                     '</div>'+
@@ -118,6 +153,11 @@ function osDisplayer(header, details){
 
     // headcounts
     $('#head-count').val(header.total_hc);
+
+    // table no.
+    if(header.table_id != null){
+        $('#table-no').val(header.table_id);
+    }
 
     setStorage('order-slip', JSON.stringify({ header , details }));
 
@@ -273,7 +313,6 @@ $('#btn-search').on('click', function(){
     });
 });
 
-
 function hideCustomerCard(){
     var hide_customer = $('#hide-customer');
     var show_customer = $('#show-customer');
@@ -291,18 +330,25 @@ function showCustomerCard(name='',points=0,wallet=0){
     // $('#customer-wallet').text(numberWithCommas(response.result.wallet));
 }
 
-
 $('#btn-save-changes').on('click', function(){
     cl(['clicked']);
     var os = JSON.parse( getStorage('order-slip') );
+
+    if(os.header.table_id == null || os.header.table_id == ''){
+        showWarning('', 'Table No. is required to continue.', function(){
+        });
+        return;
+    }
+
     var data = {
         _method : 'PATCH',
         branch_id : os.header.branch_id,
         orderslip_header_id : os.header.orderslip_header_id,
         TOTALHEADCOUNT : os.header.total_hc,
-        CELLULARNUMBER : os.header.mobile_number,
-        CUSTOMERCODE : os.header.customer_id,
-        CUSTOMERNAME : os.header.customer_name
+        // CELLULARNUMBER : os.header.mobile_number,
+        // CUSTOMERCODE : os.header.customer_id,
+        // CUSTOMERNAME : os.header.customer_name
+        table_id : os.header.table_id
     };
     postWithHeader(routes.orderSlipHeader.patch, data, function(response){
         if(response.success == false){
@@ -322,7 +368,7 @@ $('.btn-print-order-slip').on('click', function(){
     cl(['test']);
     var os = JSON.parse( getStorage('order-slip') ); 
     var data = {
-        header : 'Enchanted Kingdom',
+        header : 'LES AMIS',
         os : os,
         server_info : {
             name : getStorage('name'), 
@@ -367,9 +413,20 @@ $('.btn-finish-transaction').on('click', function(){
                         return;
                     }
 
+                    if(
+                        os.header.table_id == null || 
+                        os.header.table_id == '' || 
+                        os.header.table_id == 0
+                        ){
+                        showWarning('', 'Table No. is required to continue.', function(){
+                        });
+                        return;
+                    }
+
                     var data = {
                         _method : 'PATCH',
-                        orderslip_id : os.header.orderslip_header_id
+                        orderslip_id : os.header.orderslip_header_id,
+                        table_id : os.header.table_id
                     };
                     postWithHeader(routes.orderSlipMarkAsDone, data, function(response){
                         console.log(response);
@@ -389,4 +446,11 @@ $('.btn-finish-transaction').on('click', function(){
         }
     });
 
+});
+
+$('#table-no').on('change', function(){
+    cl([  this.value ]);
+    var os = JSON.parse( getStorage('order-slip') );
+    os.header.table_id = parseInt(this.value);  
+    setStorage('order-slip', JSON.stringify(os));
 });

@@ -7,7 +7,51 @@ $(document).ready(function(){
     } 
  
     getProduct();
+
+    showGuestByTableId();
 });
+
+function showGuestByTableId(){
+    getWithHeader('/table/'+getStorage('selected_table_id')+'/guests',{},function(response){
+        console.log(response);
+        if(response.success == false){
+            return;
+        }
+
+        // forloop the guest counts for selection
+        var container = $('#guest-container');
+        container.empty();
+        var guest_count = response.data.guests;
+        console.log(guest_count)
+        for(var y=0; y < guest_count; y++){
+            var  guest  = y+1;
+            console.log( 'guest: ' + guest );
+            container.append(
+                '<div class="col-md-3 col-sm-3">'+
+                    '<div class=" card  avatar-card text-center">  '+
+                        '<div class="card-body">'+
+                            '<span class="badge badge-pill badge-success namber" >'+guest+'</span>'+
+                            '<img data-guest-no="'+guest+'" src="/assets/images/avatar.png" class="img-fluid avatar" alt="Responsive image">'+
+                        '</div>'+ 
+                    '</div> '+
+                '</div> '
+            );
+        }
+        // end
+        selectGuest();
+    });
+}
+
+function selectGuest(){
+    $(".img-fluid.avatar").on('click', function(){
+        let self = $(this);
+        console.log(self.data('guest-no'));
+        setStorage('selected_guest_no', self.data('guest-no'));
+        $('#modal-lg').modal('hide');
+        return;
+    });
+
+}
 
 function getProduct(){ 
     //parse 
@@ -24,17 +68,18 @@ function getProduct(){
             return;
         }
   
-        displayProduct(response.result);
+        displayProduct(response.result,response.base_url);
         getComponentsOfProduct();
         getComponentsNonModifiableOfProduct();
     });
 }
 
-function displayProduct(data){
+function displayProduct(data, base_url){
     
     $('#product_name').text(data.short_code);
     $('#product_price').text(data.price);
-
+    $('#product-image').attr('src', base_url + data.img_path);
+    
     var po = JSON.parse( getStorage('product_order') );  
     po = {
         product_id : parseInt(data.product_id),
@@ -48,12 +93,21 @@ function displayProduct(data){
         instruction : "",
         is_take_out : false,
         part_number : data.part_number,
-        others:[]
+        others:[],
+        guest_no : parseInt( getStorage('selected_guest_no') ),
+        guest_type : 1,
+        discount : 0,
+        total_without_vat : 0,
+        vat : 0
+        
     };  
 
     setStorage('product_order', JSON.stringify(po));
 
     logicDisplay();
+
+
+    discount();
 }
 
 $('#instruction').on('change', function(){
@@ -110,6 +164,7 @@ $('#btn-m-minus').on('click', function(){
     }  
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
+    discount();
 });
 
 $('#btn-m-plus').on('click', function(){ 
@@ -121,9 +176,11 @@ $('#btn-m-plus').on('click', function(){
     });   
     setStorage('product_order', JSON.stringify(po));
     logicDisplay();
+
+    discount();
 }); 
 
-$('.btn.btn-flat.btn-info.add-to-order').on('click', function(){ 
+$('.btn.btn-info.add-to-order').on('click', function(){ 
     //$(this).attr('disabled','disabled');
     $.confirm({
         title: 'Confirmation!',
@@ -152,6 +209,7 @@ $('.btn.btn-flat.btn-info.add-to-order').on('click', function(){
                     var nmc = JSON.parse( getStorage('none-modifiable-item') );
                     po.none_modifiable_component = nmc;
                     postWithHeader(routes.orderSlip, po , function(response){ 
+                        setStorage('selected_guest_no','');
                         redirectTo('/');
                     }); 
                     
@@ -461,4 +519,41 @@ function logicDisplay(){
     
     console.log(':: ' + numberWithCommas(grand_total));
     $('#grand-total').text('TOTAL : ' + numberWithCommas(grand_total));
+}
+
+$('input[type=radio][name=guest-type]').change(function() {
+    var po = JSON.parse( getStorage('product_order') );
+    po.guest_type = parseInt(this.value);
+    setStorage('product_order', JSON.stringify(po)); 
+
+    discount();
+});
+
+// $('#guest-no').on('change', function(){
+//     var po = JSON.parse( getStorage('product_order') );
+//     po.guest_no = parseInt(this.value);
+//     setStorage('product_order', JSON.stringify(po)); 
+//     discount();
+// });
+
+function discount(){
+    var new_price = 0;
+    var po = JSON.parse( getStorage('product_order') );
+  
+    po.total_without_vat = (po.total/1.12);
+    po.vat = po.total_without_vat * .12 ;
+
+    if (po.guest_type == 2 || po.guest_type == 3 ){  
+        po.discount= po.total_without_vat * .20;
+        
+        new_price = po.total_without_vat - po.discount;
+    }else{
+        po.discount = 0;
+        new_price = po.total - po.discount;
+    }
+    
+    setStorage('product_order', JSON.stringify(po));
+    
+
+    $('#grand-total').text('TOTAL : ' + numberWithCommas(new_price));
 }

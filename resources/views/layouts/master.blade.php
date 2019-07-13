@@ -7,7 +7,7 @@
     <title>@yield('title') | {{ config('app.name') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/logo/favico.ico">
+    <link rel="shortcut icon" href="/assets/images/logo/favicon.ico">
 
     <!-- plugins css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />

@@ -49,22 +49,22 @@ function pendingDisplayer(items){
                         '<div class="row">'+
                             '<div class="col-md-10 ml-auto mr-auto"> '+
                                 '<div class="row">'+
-                                    '<div class="col-md-4">'+
+                                    '<div class="col-md-3">'+
                                         '<div class="pdd-vertical-5">'+
-                                            '<p class="no-mrg-btm"><b class="font-size-24">'+v.orderslip_header_id+'</b> OS#</p>'+
+                                            '<p class="no-mrg-btm"><b class="font-size-24">'+v.orderslip_header_id+'</b> OS No.</p>'+
                                         '</div>'+
                                     '</div>'+
-                                    // '<div class="col-md-3">'+
-                                    //     '<div class="pdd-vertical-5">'+
-                                    //         '<p class="no-mrg-btm"><b class="font-size-24">2</b> Item Count</p>'+
-                                    //     '</div>'+
-                                    // '</div>'+
-                                    '<div class="col-md-4">'+
+                                    '<div class="col-md-3">'+
+                                        '<div class="pdd-vertical-5">'+
+                                            '<p class="no-mrg-btm"><b class="font-size-24">'+v.table_id+'</b> Table No.</p>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="col-md-3">'+
                                         '<div class="pdd-vertical-5">'+
                                             '<p class="no-mrg-btm"><b class="font-size-24">'+numberWithCommas(net_amount)+'</b> Total</p>'+
                                         '</div>'+
                                     '</div>'+
-                                    '<div class="col-md-4">'+
+                                    '<div class="col-md-3">'+
                                         '<div class="pdd-vertical-5">'+
                                             '<p class="no-mrg-btm"><b class="font-size-24">'+v.cce_name+'</b> Prepared By</p>'+
                                         '</div>'+
