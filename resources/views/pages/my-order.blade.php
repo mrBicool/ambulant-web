@@ -3,12 +3,34 @@
 
 @section('css')
 <link rel="stylesheet" href="/css/plugins/jquery-confirm.min.css" /> 
+<style>
+    .boxx {
+        border: 1px solid gray;
+    }
+ 
+    .namber {
+        position: absolute; 
+        top: 0;
+        left: 0; 
+        border-radius: 0; 
+        height: 35px;
+        width: fit-content;
+        padding-top:5px;
+        font-size: 1.5em;
+    }
+
+    .centerr{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+</style>
 @endsection 
  
 @section('js') 
     <script src="/js/plugins/jquery-confirm.min.js"></script>
     <script src="js/pages/my-order.js"></script>
-@endsection
+@endsection 
  
 @section('content')
 <nav aria-label="breadcrumb">
@@ -127,10 +149,12 @@
                                 <div class="mrg-top-1">
                                     <div class="form-group">
                                         <label for="head-count">TABLE NO.</label>
-                                        <div class="input-group input-group-sm"> 
+                                        <h1 id="table-no" class="text-dark">0</h1>
+                                        {{-- <div class="input-group input-group-sm"> 
                                             <input id="table-no" type="text" class="form-control input-lg" placeholder="Enter Table No."  >
                                                 
-                                        </div>
+                                        </div> --}}
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">Change Table</button>
                                     </div> 
                                 </div>
 
@@ -227,6 +251,55 @@
                         </ul> --}}
                     </div>
                 </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <a class="modal-close" href="#" data-dismiss="modal">
+                    <i class="ti-close"></i>
+                </a>
+
+                <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                    <h4>Under Construction</h4>
+                </div>
+
+                <div class="padding-15">
+                    <div class="row" id="table-container">
+
+                        
+
+                        <div class="col-md-3 card col-sm-4 text-center mr-3">
+                            <div class="card-body">
+                                <span class="badge badge-pill badge-warning namber" >0</span>
+                                <img data-id="'+v.id+'" src="/assets/images/table.png" class="img-fluid tbl-order-guest" alt="Responsive image">
+                            </div>
+                        </div> 
+                        <div class="col-md-3 card col-sm-4 text-center mr-3">
+                            <div class="card-body">
+                                <span class="badge badge-pill badge-success namber" >1</span>
+                                <img data-id="'+v.id+'" src="/assets/images/table.png" class="img-fluid tbl-order-guest" alt="Responsive image">
+                            </div>
+                        </div> 
+                        {{-- <div class="ml-auto col-md-5">
+                            <h3 class="mrg-btm-20 mrg-top-130">Download App</h3>
+                            <p>Let me see your identification. You don't need to see his identification. We don't need to see his identification. These are not the droids.</p>
+                            <div class="mrg-top-20">
+                                <a href="#" data-dismiss="modal" class="btn btn-info">Noted!</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img class="img-fluid mrg-horizon-auto" src="assets/images/others/img-2.png" alt="">
+                        </div> --}}
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div> 

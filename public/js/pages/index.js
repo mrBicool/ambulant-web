@@ -22,8 +22,10 @@ function checkIfThereIsAnActiveOrder(){
                 return;
             }
 
+            setStorage('selected_table_id', response.data.table_no);
+            //setStorage('selected_guest_no','');
 
-            if(getStorage('selected_guest_no')==''){
+            if(getStorage('selected_guest_no')==''){ 
                 redirectTo('guest-selection');
                 return;
             }
