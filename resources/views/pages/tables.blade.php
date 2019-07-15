@@ -35,7 +35,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Table Selection</li> 
     </ol>
-</nav>
+</nav> 
 <br>
 <div class="container">
     <div class="row " id="table-container">

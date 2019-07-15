@@ -126,7 +126,7 @@ $('#is_takeout').change('change', function(){
     po.is_take_out = _this.is(':checked');
     setStorage('product_order', JSON.stringify(po)); 
 });
-
+ 
 $('#btn-m-minus').on('click', function(){ 
     var po = JSON.parse( getStorage('product_order') );   
     if(po.qty > 1){ 
